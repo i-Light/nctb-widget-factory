@@ -1,11 +1,4 @@
-# AI Coding Agent Instructions (`nctb-widget-factory`) (`src/engine/`), or lesson manifest (`src/lessons/`), **you MUST read and follow**:
-
-1. **[`docs/BRILLIANT_D# AI Coding Agent Instructions (`nctb-widget-factory`)
-
-> **READ THIS ENTIRE FILE BEFORE TAKING ANY ACTION IN ANY SESSION.**
-
----# AI Coding Agent Instructions (`nctb-widget-factory`)
-
+# AI Coding Agent Instructions (`nctb-widget-factory`)
 > **READ THIS ENTIRE FILE BEFORE TAKING ANY ACTION IN ANY SESSION.**
 
 ---
