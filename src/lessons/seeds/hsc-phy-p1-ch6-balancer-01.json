@@ -1,0 +1,77 @@
+{
+  "lessonId": "hsc-phy-p1-ch6-balancer-01",
+  "wedge": "ssc-hsc-physics",
+  "paper": 1,
+  "chapterNumber": 6,
+  "chapterTitle": {
+    "en": "Gravitation & Proportional Scaling",
+    "bn": "মহাকর্ষ ও অভিকর্ষ: সমানুপাতিক পরিবর্তন"
+  },
+  "lessonTitle": {
+    "en": "Inverse-Square Scaling & The Satellite Altitude (R + h) Trap",
+    "bn": "ব্যস্তবর্গীয় সূত্র ও উপগ্রহের উচ্চতার (R + h) বোর্ড ফাঁদ"
+  },
+  "widgetType": "FormulaBalancer",
+  "estimatedMinutes": 6,
+  "boardExamTag": "All Boards HSC Physics 1st Paper Ch-6 MCQ & CQ",
+  "cards": [
+    {
+      "cardNumber": 1,
+      "cardStage": "zero_fail_toy",
+      "prompt": {
+        "en": "Scale mass product (m₁m₂) and center-to-center distance r in Newton's law F = Gm₁m₂/r²! Watch how r² dominates.",
+        "bn": "নিউটনের মহাকর্ষ সূত্রে ভরের গুণফল (m₁m₂) এবং দূরত্ব r পরিবর্তন করে দেখো ব্যস্তবর্গীয় r² বলকে কীভাবে প্রভাবিত করে!"
+      },
+      "widgetProps": {
+        "mode": "explore",
+        "lawPreset": "gravitation",
+        "numeratorPower": 1,
+        "denominatorPower": 2,
+        "initialNumFactor": 1,
+        "initialDenFactor": 1,
+        "allowedNumFactors": [
+          1,
+          2,
+          4
+        ],
+        "allowedDenFactors": [
+          0.5,
+          1,
+          2,
+          3
+        ],
+        "tolerance": 0.05
+      }
+    },
+    {
+      "cardNumber": 4,
+      "cardStage": "guided_manipulation",
+      "prompt": {
+        "en": "Make gravitational force F′ exactly 16.0× stronger using mass multipliers {1×, 2×, 4×} and distance multipliers {0.5×, 1×, 2×, 3×}!",
+        "bn": "ভর {1×, 2×, 4×} এবং দূরত্ব {0.5×, 1×, 2×, 3×} গুণক ব্যবহার করে মহাকর্ষ বল F′-কে ঠিক ১৬ গুণ (16.0×) শক্তিশালী করো!"
+      },
+      "requiresSubscriptionOnFreeLink": true,
+      "widgetProps": {
+        "mode": "target_puzzle",
+        "lawPreset": "gravitation",
+        "numeratorPower": 1,
+        "denominatorPower": 2,
+        "initialNumFactor": 2,
+        "initialDenFactor": 2,
+        "allowedNumFactors": [
+          1,
+          2,
+          4
+        ],
+        "allowedDenFactors": [
+          0.5,
+          1,
+          2,
+          3
+        ],
+        "targetRatio": 16.0,
+        "tolerance": 0.05
+      }
+    }
+  ]
+}

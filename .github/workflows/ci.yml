@@ -1,0 +1,22 @@
+name: Widget Factory Gatekeeper CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify-schemas-and-evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Strict TypeScript Check
+        run: npm run typecheck
+      - name: Gate 1 (Zod) & Gate 2 (Math Solver Evals)
+        run: npm run eval:lessons

@@ -1,23 +1,11 @@
-# AI Coding Agent Guidelines
+# AI Coding Agent Instructions (`nctb-widget-factory`)
 
-This repository (`nctb-widget-factory`) enforces Brilliant.org-style active learning design principles and automated verification standards. All AI coding agents (Cursor, Claude Code, Gemini, etc.) MUST read and strictly enforce the following documentation and quality gates before modifying any widget or lesson code:
+Before creating, editing, or reviewing any widget (`src/widgets/`), engine component (`src/engine/`), or lesson manifest (`src/lessons/`), **you MUST read and follow**:
 
-## Required Documentation & Rules
-1. **Design & UX Playbook**: Strictly adhere to [`docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md`](docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md) for core philosophy, visual hierarchy, direct SVG touch physics, Web Audio API synthesis, micro-copy <= 18 words, and the 6-card lesson script.
-2. **Widget Upgrade Plan**: Follow [`docs/WIDGET_UPGRADE_PLAN.md`](docs/WIDGET_UPGRADE_PLAN.md) for sequential v2 upgrade specifications across Widgets #2 through #6.
+1. **[`docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md`](./docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md)** — Non-negotiable Brilliant-style UI/UX, direct SVG pointer manipulation (`>= 44px` touch targets, zero detached HTML range sliders), 60fps physics & riding X-Ray vectors, synthesized Web Audio haptics, stacked math fractions, and 6-card lesson rules.
+2. **[`docs/WIDGET_UPGRADE_PLAN.md`](./docs/WIDGET_UPGRADE_PLAN.md)** — Widget-by-widget v2 upgrade specifications and the 8-point Definition of Done for all 6 SSC/HSC Physics engines (`ProjectileSim` v2 reference + `#2 VectorRiverBoatSim` through `#6 FormulaBalancer`).
 
-## 8-Point Definition of Done
-Before completing or submitting any widget or lesson task, verify that all 8 points are satisfied:
-1. **Direct Canvas Drag**: Direct `<svg>` touch target / drag handle manipulation (no standalone slider controls).
-2. **6-Card Lesson Script**: Complete 6-card progression (Toy -> Forecast -> Math/Proof -> Challenge -> Board Replay -> MCQ Sprint).
-3. **Web Audio Vocabulary**: Integrated Web Audio API synthesized audio (`tick`, `pop`, `launch`, `chime`, `nudge`).
-4. **Zod Gate 1 Schema**: Strict Zod schema validation for widget props and lesson manifest.
-5. **Vitest Gate 2 Eval**: Deterministic `.eval.ts` unit test suite passing `npm run eval:lessons`.
-6. **Storybook Isolation**: Widget stories isolated in Storybook (`:6006`) with zero student-mode developer clutter.
-7. **Mathematical Typography**: `<MathFrac />` or KaTeX formatting for all fractions (no ASCII slashes).
-8. **Responsive Mobile Hit Targets**: Minimum touch targets `r >= 22px` / `44x44px` hit zones with WCAG AA compliant contrast.
-
-## Quality Gates Enforcement
-Always run and verify both validation gates before committing or finalizing changes:
-- **Gate 1**: Zod runtime schema validation.
-- **Gate 2**: Run `npm run eval:lessons` to execute deterministic Vitest solver tests.
+## Mandatory Pre-Commit Checks
+- Every widget lives in `src/widgets/<WidgetName>/` with `.tsx`, `.schema.ts`, `.eval.ts`, `.eval.test.ts`, and `.stories.tsx`.
+- Every lesson JSON in `src/lessons/` must pass both **Gate 1** (`Zod .safeParse()`) and **Gate 2** (`npm run eval:lessons` via Vitest deterministic math solvers).
+- Student UI must remain 100% distraction-free (`max-w-[580px]` centered card on `#F7F7F5`, prompts `≤ 18 words` in English and বাংলা); author/debug tools belong strictly in Storybook or the slide-over Studio Drawer.

@@ -1,0 +1,331 @@
+{
+  "lessonId": "hsc-phy-p2-ch3-kirchhoff-01",
+  "wedge": "ssc-hsc-physics",
+  "paper": 2,
+  "chapterNumber": 3,
+  "chapterTitle": {
+    "en": "Current Electricity: Circuits & Bridges",
+    "bn": "চলতড়িৎ: বর্তনী ও হুইটস্টোন ব্রিজ"
+  },
+  "lessonTitle": {
+    "en": "Parallel Current Surge & The Wheatstone Shunt Trap",
+    "bn": "সমান্তরাল তড়িৎ প্রবাহ ও হুইটস্টোন শান্টের বোর্ড ফাঁদ"
+  },
+  "widgetType": "KirchhoffCircuitBoard",
+  "estimatedMinutes": 6,
+  "boardExamTag": "Dhaka & Chattogram Board HSC Physics 2nd Paper CQ Ch-3",
+  "cards": [
+    {
+      "cardNumber": 1,
+      "cardStage": "zero_fail_toy",
+      "prompt": {
+        "en": "Toggle Series vs. Parallel and swap resistor R₂! Watch how total battery current I responds.",
+        "bn": "শ্রেণি (Series) ও সমান্তরাল (Parallel) পরিবর্তন করে R₂ বদলাও! মূল তড়িৎ প্রবাহ I কীভাবে বদলায় দেখো।"
+      },
+      "widgetProps": {
+        "mode": "explore",
+        "topology": "parallel",
+        "supplyVoltage": 12,
+        "initialR1": 6,
+        "initialR2": 6,
+        "allowedResistorValues": [
+          3,
+          6,
+          12,
+          24
+        ],
+        "lockedControls": [],
+        "targetMetric": "none",
+        "tolerance": 0.15
+      }
+    },
+    {
+      "cardNumber": 2,
+      "cardStage": "prediction_hook",
+      "prompt": {
+        "en": "Two 6 Ω resistors in series draw I = 1.0 A from a 12 V battery. Rewiring both in PARALLEL makes total current I...",
+        "bn": "দুটি 6 Ω রোধ শ্রেণিতে থাকলে 12 V ব্যাটারি থেকে 1.0 A প্রবাহ নেয়। এদের সমান্তরালে যুক্ত করলে মোট প্রবাহ কতগুণ হবে?"
+      },
+      "options": [
+        {
+          "en": "2× larger (2.0 A)",
+          "bn": "২ গুণ (2.0 A)"
+        },
+        {
+          "en": "4× larger (4.0 A)",
+          "bn": "৪ গুণ (4.0 A)"
+        },
+        {
+          "en": "Half as much (0.5 A)",
+          "bn": "অর্ধেক (0.5 A)"
+        }
+      ],
+      "correctOptionIndex": 1,
+      "widgetProps": {
+        "mode": "predict",
+        "topology": "series",
+        "supplyVoltage": 12,
+        "initialR1": 6,
+        "initialR2": 6,
+        "allowedResistorValues": [
+          6
+        ],
+        "lockedControls": [
+          "R1",
+          "R2"
+        ],
+        "targetMetric": "none",
+        "tolerance": 0.15
+      }
+    },
+    {
+      "cardNumber": 3,
+      "cardStage": "formula_lock_in",
+      "prompt": {
+        "en": "Build the NCTB two-resistor parallel shortcut R_p =",
+        "bn": "দুটি সমান্তরাল রোধের তুল্য রোধের শর্টকাট সূত্রটি তৈরি করো: R_p ="
+      },
+      "targetFormulaLatex": "R_p = \\frac{R_1 R_2}{R_1 + R_2}",
+      "availableTokens": [
+        "(R₁ × R₂)",
+        "÷",
+        "(R₁ + R₂)",
+        "(R₁ − R₂)"
+      ],
+      "correctTokenOrder": [
+        "(R₁ × R₂)",
+        "÷",
+        "(R₁ + R₂)"
+      ],
+      "seeWhySteps": [
+        {
+          "title": {
+            "en": "1. Kirchhoff Current Law (KCL) at node",
+            "bn": "১. সংযোগ বিন্দুতে কার্শফের প্রথম সূত্র (KCL)"
+          },
+          "latex": "I = I_1 + I_2 \\implies \\frac{V}{R_p} = \\frac{V}{R_1} + \\frac{V}{R_2}",
+          "note": {
+            "en": "Both parallel branches share the exact same potential drop V.",
+            "bn": "সমান্তরাল শাখাগুলোর দুই প্রান্তের বিভব পার্থক্য V সমান থাকে।"
+          }
+        },
+        {
+          "title": {
+            "en": "2. Invert common denominator",
+            "bn": "২. লসাগু করে ব্যস্তকরণ"
+          },
+          "latex": "\\frac{1}{R_p} = \\frac{R_1 + R_2}{R_1 R_2} \\implies R_p = \\frac{R_1 R_2}{R_1 + R_2}",
+          "note": {
+            "en": "R_p is always smaller than the smallest branch resistor!",
+            "bn": "সমান্তরাল তুল্য রোধ সর্বদা ক্ষুদ্রতম রোধটির চেয়েও ছোট হয়!"
+          }
+        }
+      ],
+      "widgetProps": {
+        "mode": "formula",
+        "topology": "parallel",
+        "supplyVoltage": 12,
+        "initialR1": 6,
+        "initialR2": 6,
+        "allowedResistorValues": [
+          3,
+          6,
+          12
+        ],
+        "lockedControls": [
+          "topology"
+        ],
+        "targetMetric": "none",
+        "tolerance": 0.15
+      }
+    },
+    {
+      "cardNumber": 4,
+      "cardStage": "guided_manipulation",
+      "prompt": {
+        "en": "With V = 12 V in Parallel mode, pick R₁ and R₂ from {3, 6, 12, 24} Ω to draw an exact total current I = 6.0 A!",
+        "bn": "V = 12 V ব্যাটারিতে সমান্তরাল সমবায়ে R₁ ও R₂ এমনভাবে বেছে নাও যেন মোট তড়িৎ প্রবাহ ঠিক I = 6.0 A হয়!"
+      },
+      "requiresSubscriptionOnFreeLink": true,
+      "widgetProps": {
+        "mode": "target_puzzle",
+        "topology": "parallel",
+        "supplyVoltage": 12,
+        "initialR1": 6,
+        "initialR2": 12,
+        "allowedResistorValues": [
+          3,
+          6,
+          12,
+          24
+        ],
+        "lockedControls": [
+          "topology"
+        ],
+        "targetMetric": "totalCurrent",
+        "targetValue": 6.0,
+        "tolerance": 0.15
+      }
+    },
+    {
+      "cardNumber": 5,
+      "cardStage": "exam_trap",
+      "prompt": {
+        "en": "BOARD TRAP: Wheatstone bridge arms are P = 4 Ω, Q = 8 Ω, R = 6 Ω, and 4th arm S₁ = 24 Ω. How do you balance the bridge (I_g = 0)?",
+        "bn": "বোর্ড ফাঁদ: হুইটস্টোন ব্রিজের বাহুগুলো P = 4 Ω, Q = 8 Ω, R = 6 Ω এবং ৪র্থ বাহু S₁ = 24 Ω। ব্রিজটি সাম্যাবস্থায় (I_g = 0) আনতে কী করতে হবে?"
+      },
+      "boardReference": "Dhaka Board HSC Physics 2nd Paper CQ #3 Classic",
+      "options": [
+        {
+          "label": {
+            "en": "Add 12 Ω in SERIES to 4th arm",
+            "bn": "৪র্থ বাহুতে 12 Ω শ্রেণিতে যুক্ত করা"
+          },
+          "isTrapMisconception": true,
+          "feedback": {
+            "en": "Needed S = (8/4)×6 = 12 Ω, which is LESS than 24 Ω! Adding series raises S to 36 Ω and slams the galvanometer!",
+            "bn": "সাম্যাবস্থার জন্য ৪র্থ বাহুতে 12 Ω প্রয়োজন, যা 24 Ω অপেক্ষা কম! শ্রেণিতে যুক্ত করলে রোধ বেড়ে 36 Ω হয়ে যায়!"
+          }
+        },
+        {
+          "label": {
+            "en": "Connect 24 Ω in PARALLEL (shunt) across S₁ = 24 Ω",
+            "bn": "৪র্থ বাহুর 24 Ω-এর সাথে 24 Ω সমান্তরালে (শান্ট) যুক্ত করা"
+          },
+          "isTrapMisconception": false,
+          "feedback": {
+            "en": "Exact balance! 24 Ω ∥ 24 Ω = 12 Ω, satisfying P/Q = R/S (4/8 = 6/12) with zero galvanometer current!",
+            "bn": "একদম সঠিক! 24 Ω ∥ 24 Ω = 12 Ω হওয়ায় P/Q = R/S (4/8 = 6/12) শর্ত পূরণ হয় এবং I_g = 0 হয়!"
+          }
+        }
+      ],
+      "correctOptionIndex": 1,
+      "widgetProps": {
+        "mode": "exam_trap",
+        "topology": "wheatstone",
+        "supplyVoltage": 12,
+        "initialR1": 6,
+        "initialR2": 24,
+        "allowedResistorValues": [
+          12,
+          24
+        ],
+        "bridgeArms": {
+          "P": 4,
+          "Q": 8,
+          "R": 6,
+          "SInitial": 24
+        },
+        "lockedControls": [
+          "topology",
+          "R1",
+          "R2"
+        ],
+        "targetMetric": "bridgeBalance",
+        "targetValue": 12,
+        "tolerance": 0.15
+      }
+    },
+    {
+      "cardNumber": 6,
+      "cardStage": "skills_check",
+      "prompt": {
+        "en": "Rapid 3-MCQ Circuit Check",
+        "bn": "দ্রুত ৩টি চলতড়িৎ বোর্ড MCQ"
+      },
+      "xpReward": 30,
+      "questions": [
+        {
+          "id": "kc1",
+          "prompt": {
+            "en": "Three 9 Ω resistors connected in parallel have equivalent resistance:",
+            "bn": "তিনটি 9 Ω রোধ সমান্তরালে যুক্ত করলে তুল্য রোধ কত?"
+          },
+          "options": [
+            {
+              "en": "27 Ω",
+              "bn": "27 Ω"
+            },
+            {
+              "en": "3 Ω",
+              "bn": "3 Ω"
+            },
+            {
+              "en": "1/3 Ω",
+              "bn": "1/3 Ω"
+            },
+            {
+              "en": "9 Ω",
+              "bn": "9 Ω"
+            }
+          ],
+          "correctIndex": 1,
+          "explanation": {
+            "en": "For n identical resistors in parallel, R_p = R / n = 9 / 3 = 3 Ω.",
+            "bn": "n সংখ্যক সমমানের রোধ সমান্তরালে থাকলে R_p = R / n = 9 / 3 = 3 Ω।"
+          }
+        },
+        {
+          "id": "kc2",
+          "prompt": {
+            "en": "Kirchhoff's First Law (Junction Rule ΣI = 0) expresses conservation of:",
+            "bn": "কার্শফের প্রথম সূত্র (ΣI = 0) কোনটির সংরক্ষণশীলতা নির্দেশ করে?"
+          },
+          "options": [
+            {
+              "en": "Energy",
+              "bn": "শক্তি"
+            },
+            {
+              "en": "Electric Charge",
+              "bn": "আধান (Charge)"
+            },
+            {
+              "en": "Momentum",
+              "bn": "ভরবেগ"
+            },
+            {
+              "en": "Power",
+              "bn": "ক্ষমতা"
+            }
+          ],
+          "correctIndex": 1,
+          "explanation": {
+            "en": "KCL reflects conservation of electric charge; KVL reflects conservation of energy.",
+            "bn": "কার্শফের ১ম সূত্র আধানের এবং ২য় সূত্র শক্তির নিত্যতা প্রকাশ করে।"
+          }
+        },
+        {
+          "id": "kc3",
+          "prompt": {
+            "en": "Cell EMF E = 1.5 V, internal resistance r = 0.5 Ω, external R = 2.5 Ω. Terminal voltage V is:",
+            "bn": "কোষের তড়িচ্চালক শক্তি E = 1.5 V, অভ্যন্তরীণ রোধ r = 0.5 Ω ও বহিঃস্থ R = 2.5 Ω হলে প্রান্তীয় বিভব V কত?"
+          },
+          "options": [
+            {
+              "en": "1.25 V",
+              "bn": "1.25 V"
+            },
+            {
+              "en": "1.50 V",
+              "bn": "1.50 V"
+            },
+            {
+              "en": "1.00 V",
+              "bn": "1.00 V"
+            },
+            {
+              "en": "0.25 V",
+              "bn": "0.25 V"
+            }
+          ],
+          "correctIndex": 0,
+          "explanation": {
+            "en": "I = 1.5 / (2.5 + 0.5) = 0.5 A, so V = IR = 0.5 × 2.5 = 1.25 V.",
+            "bn": "I = 1.5 / 3 = 0.5 A, অতএব প্রান্তীয় বিভব V = IR = 0.5 × 2.5 = 1.25 V।"
+          }
+        }
+      ]
+    }
+  ]
+}

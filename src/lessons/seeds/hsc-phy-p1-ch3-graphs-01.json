@@ -1,0 +1,71 @@
+{
+  "lessonId": "hsc-phy-p1-ch3-graphs-01",
+  "wedge": "ssc-hsc-physics",
+  "paper": 1,
+  "chapterNumber": 3,
+  "chapterTitle": {
+    "en": "Motion Graphs: v-t Slope & Area",
+    "bn": "গতি লেখচিত্র: v-t ঢাল ও ক্ষেত্রফল"
+  },
+  "lessonTitle": {
+    "en": "Trapezoid Displacement Area & The Negative-Velocity Trap",
+    "bn": "v-t লেখচিত্রের ক্ষেত্রফল ও ঋণাত্মক বেগের সরণ বনাম দূরত্ব ফাঁদ"
+  },
+  "widgetType": "KinematicsGraphMatcher",
+  "estimatedMinutes": 6,
+  "boardExamTag": "Cumilla & Rajshahi Board SSC/HSC Physics Graph CQ",
+  "cards": [
+    {
+      "cardNumber": 1,
+      "cardStage": "zero_fail_toy",
+      "prompt": {
+        "en": "Drag v₁ (at 4 s) and v₂ (at 8 s) on the v-t curve! Watch slope give acceleration a and shaded area give displacement s.",
+        "bn": "v-t লেখচিত্রে ৪ সেকেন্ডে v₁ এবং ৮ সেকেন্ডে v₂ পরিবর্তন করে দেখো কীভাবে ঢাল থেকে ত্বরণ a এবং ক্ষেত্রফল থেকে সরণ s পাওয়া যায়!"
+      },
+      "widgetProps": {
+        "mode": "explore",
+        "stageDurationSec": 4,
+        "initialV0": 0,
+        "initialV1": 15,
+        "initialV2": 10,
+        "velocityBounds": {
+          "min": 0,
+          "max": 20,
+          "step": 5
+        },
+        "lockedNodes": [
+          "v0"
+        ],
+        "requireZeroStage2Accel": false,
+        "tolerance": 0.5
+      }
+    },
+    {
+      "cardNumber": 4,
+      "cardStage": "guided_manipulation",
+      "prompt": {
+        "en": "Starting from rest (v₀ = 0), accelerate for 4 s then cruise at constant velocity (a₂ = 0) to cover exactly s = 60 m in 8 s!",
+        "bn": "স্থির অবস্থান (v₀ = 0) থেকে ৪ সেকেন্ড সমত্বরণে ও পরের ৪ সেকেন্ড সমবেগে (a₂ = 0) চলে মোট s = 60 m সরণ অর্জন করো!"
+      },
+      "requiresSubscriptionOnFreeLink": true,
+      "widgetProps": {
+        "mode": "target_puzzle",
+        "stageDurationSec": 4,
+        "initialV0": 0,
+        "initialV1": 15,
+        "initialV2": 5,
+        "velocityBounds": {
+          "min": 0,
+          "max": 20,
+          "step": 5
+        },
+        "lockedNodes": [
+          "v0"
+        ],
+        "requireZeroStage2Accel": true,
+        "targetDisplacementMeters": 60,
+        "tolerance": 0.5
+      }
+    }
+  ]
+}

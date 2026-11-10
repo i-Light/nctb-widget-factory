@@ -1,0 +1,82 @@
+{
+  "lessonId": "hsc-phy-p2-ch6-rayoptics-01",
+  "wedge": "ssc-hsc-physics",
+  "paper": 2,
+  "chapterNumber": 6,
+  "chapterTitle": {
+    "en": "Geometrical Optics: Lenses & Magnification",
+    "bn": "জ্যামিতিক আলোকবিজ্ঞান: লেন্স ও বিবর্ধন"
+  },
+  "lessonTitle": {
+    "en": "Principal Ray Tracing & The Dual ±m Magnification Trap",
+    "bn": "রশ্মিচিত্র ও বাস্তব-অবাস্তব দ্বৈত বিবর্ধনের বোর্ড ফাঁদ"
+  },
+  "widgetType": "RayOpticsCanvas",
+  "estimatedMinutes": 6,
+  "boardExamTag": "Dinajpur & Dhaka Board HSC Physics 2nd Paper CQ Ch-6",
+  "cards": [
+    {
+      "cardNumber": 1,
+      "cardStage": "zero_fail_toy",
+      "prompt": {
+        "en": "Slide object distance u across 2F and F on the convex lens (f = 15 cm)! Watch when the inverted real image flips into a virtual magnifier.",
+        "bn": "উত্তল লেন্সে (f = 15 cm) লক্ষ্যবস্তুর দূরত্ব u স্লাইডারটি 2F ও F অতিক্রম করিয়ে দেখো কখন উল্টো বাস্তব বিম্ব সোজা অবাস্তব বিম্বে রূপ নেয়!"
+      },
+      "widgetProps": {
+        "mode": "explore",
+        "lensType": "convex",
+        "initialFocalLengthCm": 15,
+        "initialObjectDistCm": 35,
+        "allowedFocalLengths": [
+          10,
+          15,
+          20
+        ],
+        "objectDistBounds": {
+          "min": 10,
+          "max": 50,
+          "step": 5
+        },
+        "lockedControls": [
+          "lensType",
+          "focalLength"
+        ],
+        "targetGoal": "none",
+        "requireRealImageOnScreen": false,
+        "tolerance": 0.1
+      }
+    },
+    {
+      "cardNumber": 4,
+      "cardStage": "guided_manipulation",
+      "prompt": {
+        "en": "Project a sharp REAL 2.0× magnified inverted image onto the screen by tuning focal length f and object distance u!",
+        "bn": "পর্দায় ২ গুণ বিবর্ধিত বাস্তব ও উল্টো বিম্ব পেতে ফোকাস দূরত্ব f এবং লক্ষ্যবস্তুর দূরত্ব u সমন্বয় করো!"
+      },
+      "requiresSubscriptionOnFreeLink": true,
+      "widgetProps": {
+        "mode": "target_puzzle",
+        "lensType": "convex",
+        "initialFocalLengthCm": 15,
+        "initialObjectDistCm": 40,
+        "allowedFocalLengths": [
+          10,
+          15,
+          20
+        ],
+        "objectDistBounds": {
+          "min": 15,
+          "max": 50,
+          "step": 15
+        },
+        "lockedControls": [
+          "lensType"
+        ],
+        "targetGoal": "real_magnification",
+        "targetMagnificationAbs": 2.0,
+        "requireRealImageOnScreen": true,
+        "tolerance": 0.1
+      }
+    }
+  ]
+}

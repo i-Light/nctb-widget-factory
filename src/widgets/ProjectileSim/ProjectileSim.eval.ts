@@ -1,85 +1,148 @@
-import { ProjectileCardProps } from './ProjectileSim.schema';
+import { LessonManifestSchema, type LessonManifest } from '@/engine/schema';
+import type { ProjectileCardProps } from './ProjectileSim.schema';
 
-export interface ProjectileMetrics {
-  thetaRad: number;
-  thetaDegFromHorizontal: number;
-  v0x: number;
-  v0y: number;
-  flightTime: number;
-  peakHeight: number;
+export interface PhysicsMetrics {
+  horizontalAngleDeg: number;
+  maxHeight: number;
   range: number;
+  flightTime: number;
 }
 
 export function computeProjectileMetrics(
-  initialSpeed: number,
+  speed: number,
   inputAngleDeg: number,
-  gravity: number = 9.8,
-  angleAxis: 'horizontal' | 'vertical' = 'horizontal'
-): ProjectileMetrics {
-  const thetaDegFromHorizontal = angleAxis === 'vertical' ? 90 - inputAngleDeg : inputAngleDeg;
-  const thetaRad = (thetaDegFromHorizontal * Math.PI) / 180;
-  const v0x = initialSpeed * Math.cos(thetaRad);
-  const v0y = initialSpeed * Math.sin(thetaRad);
-  const flightTime = (2 * v0y) / gravity;
-  const peakHeight = (v0y * v0y) / (2 * gravity);
-  const range = (initialSpeed * initialSpeed * Math.sin(2 * thetaRad)) / gravity;
-
+  gravity: number,
+  angleAxis: 'horizontal' | 'vertical'
+): PhysicsMetrics {
+  const horizontalAngleDeg =
+    angleAxis === 'vertical' ? 90 - inputAngleDeg : inputAngleDeg;
+  const rad = (horizontalAngleDeg * Math.PI) / 180;
+  const maxHeight =
+    (speed * speed * Math.sin(rad) * Math.sin(rad)) / (2 * gravity);
+  const range = (speed * speed * Math.sin(2 * rad)) / gravity;
+  const flightTime = (2 * speed * Math.sin(rad)) / gravity;
   return {
-    thetaRad,
-    thetaDegFromHorizontal,
-    v0x,
-    v0y,
-    flightTime,
-    peakHeight,
-    range
+    horizontalAngleDeg,
+    maxHeight: Number(maxHeight.toFixed(4)),
+    range: Number(range.toFixed(4)),
+    flightTime: Number(flightTime.toFixed(4)),
   };
 }
 
-export function verifyTargetReachable(
-  targetMetric: 'range' | 'peakHeight' | 'flightTime',
-  targetValue: number,
-  props: ProjectileCardProps,
-  stepSize: number = 5
-): boolean {
-  const [minAngle, maxAngle] = props.angleBounds;
-  const g = props.gravity;
-  const v0 = props.initialSpeed;
-
-  for (let angle = minAngle; angle <= maxAngle; angle += stepSize) {
-    const metrics = computeProjectileMetrics(v0, angle, g, props.angleAxis);
-    const value = metrics[targetMetric];
-    if (Math.abs(value - targetValue) <= props.tolerance * targetValue) {
-      return true;
-    }
+function enumerateSteps(min: number, max: number, step: number): number[] {
+  const values: number[] = [];
+  for (let v = min; v <= max + 1e-9; v += step) {
+    values.push(Number(v.toFixed(4)));
   }
-  return false;
+  return values;
 }
 
-export function evaluateProjectileLesson(
-  inputAngle: number,
-  inputSpeed: number,
-  props: ProjectileCardProps
-): { gate1Passed: boolean; gate2Passed: boolean; score: number; feedback: string } {
-  const metrics = computeProjectileMetrics(inputSpeed, inputAngle, props.gravity, props.angleAxis);
-  let targetVal = props.targetValue || 0;
-  let currentVal = 0;
+export function verifyTargetReachable(props: ProjectileCardProps): {
+  solvable: boolean;
+  matchingPairs: Array<{ speed: number; angle: number; achieved: number }>;
+  reason?: string;
+} {
+  if (props.targetMetric === 'none' || props.targetValue === undefined) {
+    return { solvable: true, matchingPairs: [] };
+  }
 
-  if (props.targetMetric === 'range') currentVal = metrics.range;
-  else if (props.targetMetric === 'peakHeight') currentVal = metrics.peakHeight;
-  else if (props.targetMetric === 'flightTime') currentVal = metrics.flightTime;
+  const speeds = props.lockedControls.includes('speed')
+    ? [props.initialSpeed]
+    : enumerateSteps(
+        props.speedBounds.min,
+        props.speedBounds.max,
+        props.speedBounds.step
+      );
 
-  const diff = Math.abs(currentVal - targetVal);
-  const allowed = (props.tolerance || 0.05) * (targetVal || 1);
+  const angles = props.lockedControls.includes('angle')
+    ? [props.initialAngle]
+    : enumerateSteps(
+        props.angleBounds.min,
+        props.angleBounds.max,
+        props.angleBounds.step
+      );
 
-  const gate1Passed = diff <= allowed;
-  const gate2Passed = gate1Passed && props.angleAxis === 'vertical' ? inputAngle === 60 : true;
+  const matchingPairs: Array<{ speed: number; angle: number; achieved: number }> = [];
 
-  const score = gate2Passed ? 100 : gate1Passed ? 80 : 0;
-  const feedback = gate2Passed
-    ? 'Perfect launch! Target hit with exact vertical-axis trap angle handling.'
-    : gate1Passed
-    ? 'Close hit! Remember angle is measured from vertical axis.'
-    : 'Missed target. Adjust angle handle and velocity vector.';
+  for (const speed of speeds) {
+    for (const angle of angles) {
+      const m = computeProjectileMetrics(
+        speed,
+        angle,
+        props.gravity,
+        props.angleAxis
+      );
+      const val = props.targetMetric === 'range' ? m.range : m.maxHeight;
+      if (Math.abs(val - props.targetValue) <= props.tolerance) {
+        matchingPairs.push({ speed, angle, achieved: val });
+      }
+    }
+  }
 
-  return { gate1Passed, gate2Passed, score, feedback };
+  if (matchingPairs.length === 0) {
+    return {
+      solvable: false,
+      matchingPairs,
+      reason: `Unreachable ${props.targetMetric}=${props.targetValue} within tolerance ±${props.tolerance} across discrete slider grid.`,
+    };
+  }
+
+  // Ensure initial state does not already solve the puzzle trivially
+  const initM = computeProjectileMetrics(
+    props.initialSpeed,
+    props.initialAngle,
+    props.gravity,
+    props.angleAxis
+  );
+  const initVal =
+    props.targetMetric === 'range' ? initM.range : initM.maxHeight;
+  if (Math.abs(initVal - props.targetValue) <= props.tolerance) {
+    return {
+      solvable: false,
+      matchingPairs,
+      reason: 'Initial slider values already satisfy targetValue (zero student effort).',
+    };
+  }
+
+  return { solvable: true, matchingPairs };
+}
+
+export function evaluateProjectileLesson(rawJson: unknown): {
+  passed: boolean;
+  errors: string[];
+  manifest?: LessonManifest;
+} {
+  const parsed = LessonManifestSchema.safeParse(rawJson);
+  if (!parsed.success) {
+    return {
+      passed: false,
+      errors: parsed.error.issues.map(
+        (i) => `Zod [${i.path.join('.')}]: ${i.message}`
+      ),
+    };
+  }
+
+  const manifest = parsed.data;
+  const errors: string[] = [];
+
+  for (const card of manifest.cards) {
+    if (card.cardStage === 'guided_manipulation') {
+      const check = verifyTargetReachable(card.widgetProps);
+      if (!check.solvable) {
+        errors.push(`Card 4 Eval Failed: ${check.reason}`);
+      }
+    }
+    if (card.cardStage === 'exam_trap') {
+      const correctOpt = card.options[card.correctOptionIndex];
+      if (!correctOpt) {
+        errors.push('Card 5 Eval Failed: correctOptionIndex out of bounds.');
+      } else if (correctOpt.isTrapMisconception) {
+        errors.push(
+          'Card 5 Eval Failed: correctOptionIndex points to a trap misconception.'
+        );
+      }
+    }
+  }
+
+  return { passed: errors.length === 0, errors, manifest };
 }
