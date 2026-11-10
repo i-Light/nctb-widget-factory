@@ -7,13 +7,13 @@ Scalable interactive 6-card STEM lesson engine and AI-verified Widget Factory fo
 - Universal Card Runner in src/engine/
 
 ## Wedge 1 Target
-SSC/HSC Physics (Paper 1 & 2) is locked in as Wedge 1 with 6 Core Physics Widgets:
-- ProjectileSim
-- VectorRiverBoatSim
-- KirchhoffCircuitBoard
-- RayOpticsCanvas
-- KinematicsGraphMatcher
-- FormulaBalancer
+All 6 of 6 Core SSC/HSC Physics Reusable Widgets are now built, paired with Zod schemas, deterministic .eval.ts solvers, Storybook stories, and bilingual seed JSON manifests:
+1. ProjectileSim (Paper 1 Ch. 3 — Trajectory & Vertical-Axis Angle Trap) — Built & Eval-Verified
+2. VectorRiverBoatSim (Paper 1 Ch. 2 — River-Boat Crossing Time vs. Zero-Drift & Perpendicular-Width Trap) — Built & Eval-Verified
+3. KirchhoffCircuitBoard (Paper 2 Ch. 3 — Series/Parallel & Wheatstone Bridge Parallel-Shunt Trap) — Built & Eval-Verified
+4. RayOpticsCanvas (Paper 2 Ch. 6 — Thin Lens Ray Tracer & Dual Real/Virtual 2x Magnification Trap) — Built & Eval-Verified
+5. KinematicsGraphMatcher (Paper 1 Ch. 3 — Piecewise v-t Slope/Area & Signed Displacement vs. Distance Trap) — Built & Eval-Verified
+6. FormulaBalancer (Paper 1 Ch. 6 — Inverse-Square Scaling & Satellite Altitude R+h Trap) — Built & Eval-Verified
 
 ## Tech Stack
 - Next.js + TypeScript + Tailwind CSS on Cloudflare, Inline SVG + Motion + Mafs + KaTeX + @dnd-kit, Storybook 11 + Vitest + Playwright, Zod + Vercel AI SDK, Rive state machines, Supabase + Gemini Vision OMR + WhatsApp + bKash
@@ -25,4 +25,4 @@ SSC/HSC Physics (Paper 1 & 2) is locked in as Wedge 1 with 6 Core Physics Widget
 - Step 3: Universal Card Runner engine implementation (src/engine/)
 - Step 4: AI verification, Vitest Eval suite & Storybook 11 workbench
 - Step 5: Supabase, Gemini Vision OMR, WhatsApp & bKash integrations
-- Step 6: End-to-end testing, Cloudflare deployment & launch "
+- Step 6: End-to-end testing, Cloudflare deployment & launch
