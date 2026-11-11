@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { ProjectileCardPropsSchema } from '@/widgets/ProjectileSim/ProjectileSim.schema';
 import { VectorRiverBoatPropsSchema } from '@/widgets/VectorRiverBoatSim/VectorRiverBoatSim.schema';
+import { KirchhoffPropsSchema } from '@/widgets/KirchhoffCircuitBoard/KirchhoffCircuitBoard.schema';
 
 export const BilingualTextSchema = z.object({
   en: z.string().min(1).max(180),
@@ -64,7 +65,7 @@ export function createLessonCardSchema<T extends z.ZodTypeAny>(widgetPropsSchema
         .array(
           z.object({
             label: BilingualTextSchema,
-            simulatedAngleDeg: z.number(),
+            simulatedAngleDeg: z.number().default(0),
             isTrapMisconception: z.boolean().default(false),
             feedback: BilingualTextSchema,
           })
@@ -116,7 +117,26 @@ export const RiverBoatLessonManifestSchema = z.object({
   cards: z.array(RiverBoatLessonCardSchema).length(6),
 });
 
+export const KirchhoffLessonCardSchema = createLessonCardSchema(
+  KirchhoffPropsSchema
+);
+
+export const KirchhoffLessonManifestSchema = z.object({
+  lessonId: z.string().regex(/^[a-z0-9-]+$/),
+  wedge: z.literal('ssc-hsc-physics'),
+  paper: z.union([z.literal(1), z.literal(2)]),
+  chapterNumber: z.number().int().min(1).max(14),
+  chapterTitle: BilingualTextSchema,
+  lessonTitle: BilingualTextSchema,
+  widgetType: z.literal('KirchhoffCircuitBoard'),
+  estimatedMinutes: z.number().min(4).max(12),
+  boardExamTag: z.string(),
+  cards: z.array(KirchhoffLessonCardSchema).length(6),
+});
+
 export type LessonManifest = z.infer<typeof LessonManifestSchema>;
 export type LessonCard = z.infer<typeof LessonCardSchema>;
 export type RiverBoatLessonManifest = z.infer<typeof RiverBoatLessonManifestSchema>;
 export type RiverBoatLessonCard = z.infer<typeof RiverBoatLessonCardSchema>;
+export type KirchhoffLessonManifest = z.infer<typeof KirchhoffLessonManifestSchema>;
+export type KirchhoffLessonCard = z.infer<typeof KirchhoffLessonCardSchema>;
