@@ -12,13 +12,14 @@ export const VectorRiverBoatPropsSchema = z.object({
   riverWidth: z.number().min(20).max(500).default(120),
   initialStreamSpeed: z.number().min(1).max(20).default(3),
   initialBoatSpeed: z.number().min(2).max(25).default(6),
-  initialHeadingDeg: z.number().min(30).max(150).default(90),
-  boatSpeedBounds: SliderBoundsSchema.default({ min: 4, max: 10, step: 2 }),
-  headingBounds: SliderBoundsSchema.default({ min: 60, max: 150, step: 15 }),
+  initialHeadingDeg: z.number().min(0).max(165).default(90),
+  boatSpeedBounds: SliderBoundsSchema.default({ min: 4, max: 8, step: 2 }),
+  headingBounds: SliderBoundsSchema.default({ min: 45, max: 150, step: 5 }),
   lockedControls: z
     .array(z.enum(['streamSpeed', 'boatSpeed', 'heading']))
     .default(['streamSpeed']),
   showVectorParallelogram: z.boolean().default(true),
+  downstreamRockMeters: z.number().min(8).max(200).optional(),
   targetGoal: z
     .enum(['none', 'zero_drift', 'min_time', 'target_drift'])
     .default('none'),
