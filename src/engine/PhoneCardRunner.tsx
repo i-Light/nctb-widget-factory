@@ -242,4 +242,4 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
 
       {studioSheetOpen && <PhoneStudioBottomSheet lessonId={manifest.lessonId} passed={evalSummary.passed} simulatedHallucination={simulatedHallucination} onRunHallucinationDemo={runHallucinationDemo} onClose={() => setStudioSheetOpen(false)} />}
     </div>;
-};' at (y=350, x=450).
+};'
