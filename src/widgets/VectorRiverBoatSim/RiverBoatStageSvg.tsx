@@ -225,4 +225,3 @@ export const RiverBoatStageSvg: React.FC<RiverBoatStageSvgProps> = ({
     </div>
   );
 };
-};
