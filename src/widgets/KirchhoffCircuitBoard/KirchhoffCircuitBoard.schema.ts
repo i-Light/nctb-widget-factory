@@ -6,7 +6,7 @@ export const KirchhoffPropsSchema = z.object({
   supplyVoltage: z.number().min(1).max(48).default(12),
   initialR1: z.number().positive().default(6),
   initialR2: z.number().positive().default(6),
-  allowedResistorValues: z.array(z.number().positive()).default([3, 6, 12, 24]),
+  allowedResistorValues: z.array(z.number().positive()).min(1).default([3, 6, 12, 24]),
   bridgeArms: z
     .object({
       P: z.number().positive(),
@@ -15,8 +15,12 @@ export const KirchhoffPropsSchema = z.object({
       SInitial: z.number().positive(),
     })
     .optional(),
+  maxFuseCurrent: z.number().positive().optional(),
+  showNodeVoltages: z.boolean().default(true),
   lockedControls: z.array(z.enum(['topology', 'R1', 'R2'])).default([]),
-  targetMetric: z.enum(['none', 'totalCurrent', 'equivalentResistance', 'bridgeBalance']).default('none'),
+  targetMetric: z
+    .enum(['none', 'totalCurrent', 'equivalentResistance', 'bridgeBalance'])
+    .default('none'),
   targetValue: z.number().nonnegative().optional(),
   tolerance: z.number().positive().default(0.15),
 });
