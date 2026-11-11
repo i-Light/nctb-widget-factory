@@ -19,28 +19,84 @@
       "cardNumber": 1,
       "cardStage": "zero_fail_toy",
       "prompt": {
-        "en": "Slide object distance u across 2F and F on the convex lens (f = 15 cm)! Watch when the inverted real image flips into a virtual magnifier.",
-        "bn": "উত্তল লেন্সে (f = 15 cm) লক্ষ্যবস্তুর দূরত্ব u স্লাইডারটি 2F ও F অতিক্রম করিয়ে দেখো কখন উল্টো বাস্তব বিম্ব সোজা অবাস্তব বিম্বে রূপ নেয়!"
+        "en": "Drag the candle across 2F and F. Watch the image flip from real to virtual!",
+        "bn": "মোমবাতিটি টেনে 2F ও F পার করাও। দেখো বিম্ব কখন বাস্তব থেকে অবাস্তব হয়!"
       },
       "widgetProps": {
         "mode": "explore",
         "lensType": "convex",
         "initialFocalLengthCm": 15,
-        "initialObjectDistCm": 35,
-        "allowedFocalLengths": [
-          10,
-          15,
-          20
-        ],
-        "objectDistBounds": {
-          "min": 10,
-          "max": 50,
-          "step": 5
+        "initialObjectDistCm": 40,
+        "allowedFocalLengths": [10, 15, 20],
+        "objectDistBounds": { "min": 8, "max": 55, "step": 1 },
+        "lockedControls": ["lensType", "focalLength"],
+        "targetGoal": "none",
+        "requireRealImageOnScreen": false,
+        "tolerance": 0.1
+      }
+    },
+    {
+      "cardNumber": 2,
+      "cardStage": "prediction_hook",
+      "prompt": {
+        "en": "Candle at 2F (u = 30 cm, f = 15 cm). Predict the image size!",
+        "bn": "মোমবাতি 2F-এ (u = 30 cm, f = 15 cm)। বিম্বের আকার কেমন হবে অনুমান করো!"
+      },
+      "options": [
+        { "en": "2× larger, inverted", "bn": "২ গুণ বড়, উল্টো" },
+        { "en": "Same size, inverted (1×)", "bn": "সমান আকার, উল্টো (1×)" },
+        { "en": "Half size, upright", "bn": "অর্ধেক আকার, সোজা" }
+      ],
+      "correctOptionIndex": 1,
+      "widgetProps": {
+        "mode": "predict",
+        "lensType": "convex",
+        "initialFocalLengthCm": 15,
+        "initialObjectDistCm": 30,
+        "allowedFocalLengths": [15],
+        "objectDistBounds": { "min": 8, "max": 55, "step": 1 },
+        "lockedControls": ["lensType", "focalLength", "objectDist"],
+        "targetGoal": "none",
+        "requireRealImageOnScreen": false,
+        "tolerance": 0.1
+      }
+    },
+    {
+      "cardNumber": 3,
+      "cardStage": "formula_lock_in",
+      "prompt": {
+        "en": "Tap tiles to build the lens-formula image distance: v =",
+        "bn": "টাইল ট্যাপ করে লেন্সের সূত্র থেকে বিম্ব দূরত্বের রাশিটি সাজাও: v ="
+      },
+      "targetFormulaLatex": "v = \\frac{u f}{u - f}",
+      "availableTokens": ["u × f", "u − f", "u + f", "f − u"],
+      "correctTokenOrder": ["u × f", "u − f"],
+      "seeWhySteps": [
+        {
+          "title": { "en": "1. Thin-lens formula (real-is-positive)", "bn": "১. পাতলা লেন্সের সূত্র (বাস্তব-ধনাত্মক রীতি)" },
+          "latex": "\\frac{1}{u} + \\frac{1}{v} = \\frac{1}{f}",
+          "note": {
+            "en": "NCTB convention: real distances are positive, so a real image has v > 0.",
+            "bn": "NCTB রীতিতে বাস্তব দূরত্ব ধনাত্মক, তাই বাস্তব বিম্বের জন্য v > 0।"
+          }
         },
-        "lockedControls": [
-          "lensType",
-          "focalLength"
-        ],
+        {
+          "title": { "en": "2. Isolate v", "bn": "২. v-কে আলাদা করো" },
+          "latex": "\\frac{1}{v} = \\frac{1}{f} - \\frac{1}{u} = \\frac{u - f}{u f} \\implies v = \\frac{u f}{u - f}",
+          "note": {
+            "en": "If u < f the denominator turns negative: v < 0 means a virtual image on the candle's side.",
+            "bn": "u < f হলে হর ঋণাত্মক হয়: v < 0 মানে মোমবাতির পাশেই অবাস্তব বিম্ব।"
+          }
+        }
+      ],
+      "widgetProps": {
+        "mode": "formula",
+        "lensType": "convex",
+        "initialFocalLengthCm": 15,
+        "initialObjectDistCm": 25,
+        "allowedFocalLengths": [10, 15, 20],
+        "objectDistBounds": { "min": 8, "max": 55, "step": 1 },
+        "lockedControls": ["lensType"],
         "targetGoal": "none",
         "requireRealImageOnScreen": false,
         "tolerance": 0.1
@@ -50,33 +106,150 @@
       "cardNumber": 4,
       "cardStage": "guided_manipulation",
       "prompt": {
-        "en": "Project a sharp REAL 2.0× magnified inverted image onto the screen by tuning focal length f and object distance u!",
-        "bn": "পর্দায় ২ গুণ বিবর্ধিত বাস্তব ও উল্টো বিম্ব পেতে ফোকাস দূরত্ব f এবং লক্ষ্যবস্তুর দূরত্ব u সমন্বয় করো!"
+        "en": "Focus a sharp 2.0× real image onto the screen at v = 60 cm!",
+        "bn": "v = 60 cm দূরের পর্দায় ২ গুণ বিবর্ধিত স্পষ্ট বাস্তব বিম্ব ফোকাস করো!"
       },
       "requiresSubscriptionOnFreeLink": true,
+      "seeWhySteps": [
+        {
+          "title": { "en": "Use m = v / u, then the lens formula", "bn": "প্রথমে m = v / u, তারপর লেন্সের সূত্র" },
+          "latex": "u = \\frac{60}{2} = 30\\text{ cm},\\; \\frac{1}{f} = \\frac{1}{30} + \\frac{1}{60} = \\frac{1}{20} \\implies f = 20\\text{ cm}",
+          "note": {
+            "en": "Pick the +5 D pill (f = 20 cm) and slide the candle to u = 30 cm.",
+            "bn": "+5 D পিল (f = 20 cm) বেছে মোমবাতিটি u = 30 cm-এ সরাও।"
+          }
+        }
+      ],
       "widgetProps": {
         "mode": "target_puzzle",
         "lensType": "convex",
         "initialFocalLengthCm": 15,
         "initialObjectDistCm": 40,
-        "allowedFocalLengths": [
-          10,
-          15,
-          20
-        ],
-        "objectDistBounds": {
-          "min": 15,
-          "max": 50,
-          "step": 15
-        },
-        "lockedControls": [
-          "lensType"
-        ],
-        "targetGoal": "real_magnification",
-        "targetMagnificationAbs": 2.0,
+        "allowedFocalLengths": [10, 15, 20],
+        "objectDistBounds": { "min": 10, "max": 55, "step": 5 },
+        "lockedControls": ["lensType"],
+        "targetGoal": "screen_focus",
+        "targetMagnificationAbs": 2,
+        "screenDistanceCm": 60,
+        "screenToleranceCm": 0.5,
         "requireRealImageOnScreen": true,
         "tolerance": 0.1
       }
+    },
+    {
+      "cardNumber": 5,
+      "cardStage": "exam_trap",
+      "prompt": {
+        "en": "DINAJPUR BOARD: Convex f = 20 cm. Where must the candle sit for 2× magnification?",
+        "bn": "দিনাজপুর বোর্ড: উত্তল লেন্স f = 20 cm। ২ গুণ বিবর্ধনের জন্য মোমবাতি কোথায় রাখবে?"
+      },
+      "boardReference": "Dinajpur Board HSC Physics 2nd Paper CQ #6 (Dual ±m)",
+      "options": [
+        {
+          "label": { "en": "Only at u = 30 cm (real image)", "bn": "শুধু u = 30 cm-এ (বাস্তব বিম্ব)" },
+          "isTrapMisconception": true,
+          "feedback": {
+            "en": "Half right! u = 10 cm ALSO gives 2× — an upright virtual image (m = +2).",
+            "bn": "অর্ধেক ঠিক! u = 10 cm-এও ২ গুণ বিম্ব হয় — সোজা অবাস্তব বিম্ব (m = +2)।"
+          }
+        },
+        {
+          "label": { "en": "At 2F, u = 40 cm", "bn": "2F-এ, u = 40 cm" },
+          "isTrapMisconception": true,
+          "feedback": {
+            "en": "At 2F the image is the SAME size (m = −1). Watch the red ghost!",
+            "bn": "2F-এ বিম্ব সমান আকারের হয় (m = −1)। লাল ছায়া-বিম্বটি দেখো!"
+          }
+        },
+        {
+          "label": { "en": "Both u = 30 cm (real) and u = 10 cm (virtual)", "bn": "u = 30 cm (বাস্তব) ও u = 10 cm (অবাস্তব) দুটোই" },
+          "isTrapMisconception": false,
+          "feedback": {
+            "en": "Exactly! 30 cm → v = 60 cm (m = −2); 10 cm → v = −20 cm (m = +2).",
+            "bn": "একদম ঠিক! 30 cm → v = 60 cm (m = −2); 10 cm → v = −20 cm (m = +2)।"
+          }
+        }
+      ],
+      "correctOptionIndex": 2,
+      "seeWhySteps": [
+        {
+          "title": { "en": "1. Real image: v = +2u", "bn": "১. বাস্তব বিম্ব: v = +2u" },
+          "latex": "\\frac{1}{u} + \\frac{1}{2u} = \\frac{1}{20} \\implies \\frac{3}{2u} = \\frac{1}{20} \\implies u = 30\\text{ cm}",
+          "note": {
+            "en": "Between F and 2F the image is real, inverted and magnified.",
+            "bn": "F ও 2F-এর মাঝে বিম্ব বাস্তব, উল্টো ও বিবর্ধিত।"
+          }
+        },
+        {
+          "title": { "en": "2. Virtual image: v = −2u", "bn": "২. অবাস্তব বিম্ব: v = −2u" },
+          "latex": "\\frac{1}{u} - \\frac{1}{2u} = \\frac{1}{20} \\implies \\frac{1}{2u} = \\frac{1}{20} \\implies u = 10\\text{ cm}",
+          "note": {
+            "en": "Inside F the lens acts as a magnifier: upright, virtual, 2×.",
+            "bn": "F-এর ভেতরে লেন্সটি বিবর্ধক কাচ: সোজা, অবাস্তব, ২ গুণ।"
+          }
+        }
+      ],
+      "widgetProps": {
+        "mode": "exam_trap",
+        "lensType": "convex",
+        "initialFocalLengthCm": 20,
+        "initialObjectDistCm": 30,
+        "allowedFocalLengths": [20],
+        "objectDistBounds": { "min": 8, "max": 55, "step": 1 },
+        "lockedControls": ["lensType", "focalLength", "objectDist"],
+        "targetGoal": "dual_magnification",
+        "targetMagnificationAbs": 2,
+        "replayObjectDistsCm": { "real": 30, "virtual": 10, "trap": 40 },
+        "requireRealImageOnScreen": false,
+        "tolerance": 0.1
+      }
+    },
+    {
+      "cardNumber": 6,
+      "cardStage": "skills_check",
+      "prompt": {
+        "en": "3-MCQ Lens Sprint — Lock in your optics mastery!",
+        "bn": "লেন্সের ৩টি বোর্ড MCQ স্প্রিন্ট — মাস্টারি লক করো!"
+      },
+      "xpReward": 35,
+      "questions": [
+        {
+          "id": "ro1",
+          "prompt": { "en": "A convex lens has power +5 D. Its focal length is:", "bn": "একটি উত্তল লেন্সের ক্ষমতা +5 D। এর ফোকাস দূরত্ব কত?" },
+          "options": [
+            { "en": "5 cm", "bn": "5 cm" },
+            { "en": "20 cm", "bn": "20 cm" },
+            { "en": "50 cm", "bn": "50 cm" },
+            { "en": "0.5 cm", "bn": "0.5 cm" }
+          ],
+          "correctIndex": 1,
+          "explanation": { "en": "f = 1 / P = 1 / 5 m = 0.20 m = 20 cm.", "bn": "f = 1 / P = 1 / 5 m = 0.20 m = 20 cm।" }
+        },
+        {
+          "id": "ro2",
+          "prompt": { "en": "An object sits exactly at F of a convex lens. The image forms:", "bn": "উত্তল লেন্সের ঠিক F বিন্দুতে বস্তু রাখলে বিম্ব কোথায় গঠিত হয়?" },
+          "options": [
+            { "en": "At 2F, same size", "bn": "2F-এ, সমান আকার" },
+            { "en": "At F, diminished", "bn": "F-এ, খর্বিত" },
+            { "en": "At infinity", "bn": "অসীমে" },
+            { "en": "Between F and the lens", "bn": "F ও লেন্সের মাঝে" }
+          ],
+          "correctIndex": 2,
+          "explanation": { "en": "u = f makes 1/v = 0, so refracted rays leave parallel: image at infinity.", "bn": "u = f হলে 1/v = 0, প্রতিসৃত রশ্মি সমান্তরাল হয়: বিম্ব অসীমে।" }
+        },
+        {
+          "id": "ro3",
+          "prompt": { "en": "Convex lens f = 10 cm, object at u = 15 cm. Magnification m is:", "bn": "উত্তল লেন্স f = 10 cm, বস্তু u = 15 cm দূরে। বিবর্ধন m কত?" },
+          "options": [
+            { "en": "−2 (real, inverted)", "bn": "−2 (বাস্তব, উল্টো)" },
+            { "en": "+2 (virtual, upright)", "bn": "+2 (অবাস্তব, সোজা)" },
+            { "en": "−0.5 (diminished)", "bn": "−0.5 (খর্বিত)" },
+            { "en": "+3 (virtual)", "bn": "+3 (অবাস্তব)" }
+          ],
+          "correctIndex": 0,
+          "explanation": { "en": "v = (15 × 10)/(15 − 10) = 30 cm, so m = −v/u = −2.", "bn": "v = (15 × 10)/(15 − 10) = 30 cm, অতএব m = −v/u = −2।" }
+        }
+      ]
     }
   ]
 }

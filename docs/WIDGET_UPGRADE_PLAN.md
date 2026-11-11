@@ -57,21 +57,23 @@ All widget upgrades must obey [`docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md`](./BRI
 
 ---
 
-### Step 3 Next → Widget #4: `<RayOpticsCanvas />` v2 (Phone-Only)
+### Step 3 (COMPLETED) → Widget #4: `<RayOpticsCanvas />` v2 (Phone-Only)
 **Syllabus Target:** HSC Physics 2nd Paper, Chapter 6 & SSC Physics Chapter 9 (*জ্যামিতিক আলোকবিজ্ঞান — লেন্স ও বিবর্ধন*)
 
-- **One-Thumb On-Canvas Manipulation:**
+- [x] **One-Thumb On-Canvas Manipulation:**
   - High-contrast dark velvet optic stage (`#0F172A`, `viewBox="0 0 360 276"`) where a thumb drags the glowing candle along the optical rail (`u ∈ [8, 55] cm`, `r = 28px` hit zone, `u` readout floated `42px` above the candle flame so the thumb below the rail never covers the rays!) paired with bottom focal-power pills (`+10D`, `+6.67D`, `+5D`).
-- **60fps Visuals & Ray X-Ray Layer:**
+- [x] **60fps Visuals & Ray X-Ray Layer:**
   - Three laser-crisp principal rays smoothly refracting through `u > f`, pulsing parallel at `u = f` (`"Image at ∞!"`), and extending dashed virtual back-rays for `u < f`.
-- **Card 4 Cinema Screen Focus Challenge:**
+- [x] **Card 4 Cinema Screen Focus Challenge:**
   - Focus a sharp `2.0×` real inverted image onto the fixed `v = +60 cm` screen as the blur halo tightens to razor clarity.
-- **Card 5 Dual-Position `±m` Trap Replay (Dinajpur Board 4-Mark CQ):**
+- [x] **Card 5 Dual-Position `±m` Trap Replay (Dinajpur Board 4-Mark CQ):**
   - Simultaneously overlays `u = 30 cm` (real inverted `2×`) and `u = 10 cm` (virtual upright `2×`) against the `u = 40 cm` (`2F → 1×`) trap.
+- [x] **Gate 2 `.eval.ts` Verification:**
+  - Verifies the 16-word phone prompt cap, that only `f = 20 cm, u = 30 cm` focuses a sharp `2.0×` image on the `v = 60 cm` screen, rejects concave-lens real-image screen puzzles and pre-solved initial states, and proves the Card 5 dual `±m` positions (`m = −2`, `m = +2`) against the `2F` trap (`m = −1`).
 
 ---
 
-### Step 4 → Widget #5: `<KinematicsGraphMatcher />` v2 (Phone-Only)
+### Step 4 Next → Widget #5: `<KinematicsGraphMatcher />` v2 (Phone-Only)
 **Syllabus Target:** HSC Physics 1st Paper, Chapter 3 & SSC Physics Chapter 2 (*গতি লেখচিত্র — ঢাল ও ক্ষেত্রফল*)
 
 - **One-Thumb Portrait Stacked Track + Graph:**

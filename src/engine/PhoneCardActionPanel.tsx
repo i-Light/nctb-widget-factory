@@ -4,10 +4,10 @@ import React from 'react';
 import { BookOpen, Check, ChevronRight, Sparkles } from 'lucide-react';
 import { sfx } from './audio';
 import { MathFrac } from './MathFrac';
-import type { KirchhoffLessonCard, LessonCard, RiverBoatLessonCard } from './schema';
+import type { KirchhoffLessonCard, LessonCard, RayOpticsLessonCard, RiverBoatLessonCard } from './schema';
 export const PhoneCardActionPanel: React.FC<{
-  card: LessonCard | RiverBoatLessonCard | KirchhoffLessonCard;
-  widgetType: 'ProjectileSim' | 'VectorRiverBoatSim' | 'KirchhoffCircuitBoard';
+  card: LessonCard | RiverBoatLessonCard | KirchhoffLessonCard | RayOpticsLessonCard;
+  widgetType: 'ProjectileSim' | 'VectorRiverBoatSim' | 'KirchhoffCircuitBoard' | 'RayOpticsCanvas';
   lang: 'en' | 'bn';
   toyRuns: number;
   selectedPredIdx: number | null;
@@ -73,7 +73,7 @@ export const PhoneCardActionPanel: React.FC<{
       </div>;
   }
   if (card.cardStage === 'formula_lock_in') {
-    const formulaPrefix = widgetType === 'VectorRiverBoatSim' ? 'cos α = −' : widgetType === 'KirchhoffCircuitBoard' ? 'R_p =' : 'H =';
+    const formulaPrefix = widgetType === 'VectorRiverBoatSim' ? 'cos α = −' : widgetType === 'KirchhoffCircuitBoard' ? 'R_p =' : widgetType === 'RayOpticsCanvas' ? 'v =' : 'H =';
     return <div className="space-y-2 rounded-2xl border border-slate-200 bg-white p-3 shadow-xs">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-base font-extrabold text-slate-900">
