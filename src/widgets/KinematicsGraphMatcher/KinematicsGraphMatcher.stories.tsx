@@ -7,6 +7,15 @@ const meta: Meta<typeof KinematicsGraphMatcher> = {
   component: KinematicsGraphMatcher,
 };
 export default meta;
-export const Card4Cruise60m: StoryObj<typeof KinematicsGraphMatcher> = {
-  args: { config: (seed.cards[1] as any).widgetProps },
+
+export const Card1DragAndDrive: StoryObj<typeof KinematicsGraphMatcher> = {
+  args: { config: (seed.cards[0] as any).widgetProps, lang: 'bn' },
+};
+
+export const Card4ChargingPadStop: StoryObj<typeof KinematicsGraphMatcher> = {
+  args: { config: (seed.cards[3] as any).widgetProps, lang: 'en' },
+};
+
+export const Card5TurnaroundTrap: StoryObj<typeof KinematicsGraphMatcher> = {
+  args: { config: (seed.cards[4] as any).widgetProps, lang: 'bn', dualReplayTrigger: 1 },
 };

@@ -14,8 +14,10 @@ import { KirchhoffCircuitBoard } from '@/widgets/KirchhoffCircuitBoard/Kirchhoff
 import { evaluateKirchhoffLesson, verifyKirchhoffPuzzle } from '@/widgets/KirchhoffCircuitBoard/KirchhoffCircuitBoard.eval';
 import { RayOpticsCanvas } from '@/widgets/RayOpticsCanvas/RayOpticsCanvas';
 import { evaluateRayOpticsLesson, verifyRayOpticsPuzzle } from '@/widgets/RayOpticsCanvas/RayOpticsCanvas.eval';
-import type { KirchhoffLessonManifest, LessonManifest, RayOpticsLessonManifest, RiverBoatLessonManifest } from './schema';
-type SupportedManifest = LessonManifest | RiverBoatLessonManifest | KirchhoffLessonManifest | RayOpticsLessonManifest;
+import { KinematicsGraphMatcher } from '@/widgets/KinematicsGraphMatcher/KinematicsGraphMatcher';
+import { evaluateKinematicsLesson, verifyKinematicsGraphPuzzle } from '@/widgets/KinematicsGraphMatcher/KinematicsGraphMatcher.eval';
+import type { KinematicsLessonManifest, KirchhoffLessonManifest, LessonManifest, RayOpticsLessonManifest, RiverBoatLessonManifest } from './schema';
+type SupportedManifest = LessonManifest | RiverBoatLessonManifest | KirchhoffLessonManifest | RayOpticsLessonManifest | KinematicsLessonManifest;
 type Lang = 'en' | 'bn';
 export interface PhoneCardRunnerProps {
   manifest: SupportedManifest;
@@ -91,6 +93,7 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
     if (manifest.widgetType === 'VectorRiverBoatSim') return evaluateRiverBoatLesson(manifest);
     if (manifest.widgetType === 'KirchhoffCircuitBoard') return evaluateKirchhoffLesson(manifest);
     if (manifest.widgetType === 'RayOpticsCanvas') return evaluateRayOpticsLesson(manifest);
+    if (manifest.widgetType === 'KinematicsGraphMatcher') return evaluateKinematicsLesson(manifest);
     return evaluateProjectileLesson(manifest);
   }, [manifest]);
   const renderWidget = () => {
@@ -113,6 +116,13 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
       const roCard = manifest.cards[cardIdx];
       if (roCard.cardStage === 'skills_check') return null;
       return <RayOpticsCanvas config={roCard.widgetProps} lang={lang} dualReplayTrigger={dualReplayCount} onRunComplete={({
+        runCount
+      }) => setToyRuns(runCount)} onGoalSolved={() => setPuzzleSolved(true)} />;
+    }
+    if (manifest.widgetType === 'KinematicsGraphMatcher') {
+      const kgCard = manifest.cards[cardIdx];
+      if (kgCard.cardStage === 'skills_check') return null;
+      return <KinematicsGraphMatcher config={kgCard.widgetProps} lang={lang} dualReplayTrigger={dualReplayCount} onRunComplete={({
         runCount
       }) => setToyRuns(runCount)} onGoalSolved={() => setPuzzleSolved(true)} />;
     }
@@ -167,6 +177,15 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
           lensType: 'concave'
         });
         setSimulatedHallucination(res.reason ?? 'Gate 2 blocked concave real-image screen puzzle.');
+      }
+    } else if (manifest.widgetType === 'KinematicsGraphMatcher') {
+      const c4 = manifest.cards[3];
+      if (c4.cardStage === 'guided_manipulation') {
+        const res = verifyKinematicsGraphPuzzle({
+          ...c4.widgetProps,
+          targetDisplacementMeters: 65
+        });
+        setSimulatedHallucination(res.reason ?? 'Gate 2 blocked unreachable 65 m charging pad.');
       }
     } else {
       const broken = structuredClone(manifest);

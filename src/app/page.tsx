@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { Aperture, Compass, Flame, Zap, ChevronRight, Lock } from 'lucide-react';
+import { Activity, Aperture, Compass, Flame, Zap, ChevronRight, Lock } from 'lucide-react';
 import projectileSeed from '@/lessons/seeds/hsc-phy-p1-ch3-projectile-01.json';
 import riverBoatSeed from '@/lessons/seeds/hsc-phy-p1-ch2-riverboat-01.json';
 import kirchhoffSeed from '@/lessons/seeds/hsc-phy-p2-ch3-kirchhoff-01.json';
 import rayOpticsSeed from '@/lessons/seeds/hsc-phy-p2-ch6-rayoptics-01.json';
+import kinematicsSeed from '@/lessons/seeds/hsc-phy-p1-ch3-graphs-01.json';
 
 export default function HomePage() {
   return (
@@ -28,6 +29,29 @@ export default function HomePage() {
           </h2>
 
           <Link
+            href="/play/kinematics"
+            className="flex min-h-[84px] items-center justify-between gap-3 rounded-2xl border-2 border-emerald-600 border-b-4 bg-white p-3.5 active:translate-y-0.5 active:border-b-2 transition touch-manipulation"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-600 text-white">
+                <Activity className="h-6 w-6" />
+              </div>
+              <div>
+                <span className="inline-block rounded-md bg-emerald-100 px-1.5 py-0.5 text-[10px] font-extrabold text-emerald-900">
+                  NEW v2 · HSC P1 Ch-3
+                </span>
+                <h3 className="mt-0.5 text-sm font-extrabold text-slate-900">
+                  {kinematicsSeed.chapterTitle.bn}
+                </h3>
+                <p className="text-xs font-medium text-slate-600">
+                  {kinematicsSeed.lessonTitle.en}
+                </p>
+              </div>
+            </div>
+            <ChevronRight className="h-5 w-5 shrink-0 text-emerald-700" />
+          </Link>
+
+          <Link
             href="/play/rayoptics"
             className="flex min-h-[84px] items-center justify-between gap-3 rounded-2xl border-2 border-sky-600 border-b-4 bg-white p-3.5 active:translate-y-0.5 active:border-b-2 transition touch-manipulation"
           >
@@ -37,7 +61,7 @@ export default function HomePage() {
               </div>
               <div>
                 <span className="inline-block rounded-md bg-sky-100 px-1.5 py-0.5 text-[10px] font-extrabold text-sky-900">
-                  NEW v2 · HSC P2 Ch-6
+                  v2 Ready · HSC P2 Ch-6
                 </span>
                 <h3 className="mt-0.5 text-sm font-extrabold text-slate-900">
                   {rayOpticsSeed.chapterTitle.bn}
@@ -125,7 +149,6 @@ export default function HomePage() {
             Up Next in Phone-Only v2 Queue
           </h2>
           {[
-            'Widget #5 · গতি লেখচিত্র (KinematicsGraphMatcher)',
             'Widget #6 · মহাকর্ষ ও অভিকর্ষ (FormulaBalancer)',
           ].map((item) => (
             <div
