@@ -73,19 +73,21 @@ All widget upgrades must obey [`docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md`](./BRI
 
 ---
 
-### Step 4 Next → Widget #5: `<KinematicsGraphMatcher />` v2 (Phone-Only)
+### Step 4 (COMPLETED) → Widget #5: `<KinematicsGraphMatcher />` v2 (Phone-Only)
 **Syllabus Target:** HSC Physics 1st Paper, Chapter 3 & SSC Physics Chapter 2 (*গতি লেখচিত্র — ঢাল ও ক্ষেত্রফল*)
 
-- **One-Thumb Portrait Stacked Track + Graph:**
+- [x] **One-Thumb Portrait Stacked Track + Graph:**
   - Stacked vertically for portrait phones (`viewBox="0 0 360 290"`): miniature EV highway track across the top `64px` synchronized 1:1 above the `v-t` chart where thumbs drag large `r = 28px` control nodes `(4s, v₁)` and `(8s, v₂)` with floating above-thumb `(t, v)` badges.
-- **60fps Coupled Simulation & Area X-Ray:**
+- [x] **60fps Coupled Simulation & Area X-Ray:**
   - Tapping the bottom `DRIVE` CTA sweeps the time playhead `0s → 8s` while the EV accelerates, cruises, brakes, and reverses in lockstep and `+Δs` (emerald) / `−Δs` (coral) area blocks fill beneath the curve.
-- **Card 4 & Card 5 Challenges:**
+- [x] **Card 4 & Card 5 Challenges:**
   - Card 4 `60.0 m` charging-pad stop challenge; Card 5 turnaround replay (`+20m` forward then `−20m` reverse → `0m` net displacement vs. `40m` odometer distance).
+- [x] **Gate 2 `.eval.ts` Verification:**
+  - Verifies the 16-word phone prompt cap, that the whole trip stays on the visible track, that only `v₁ = 15, v₂ = 0` docks on the `60 m` pad, rejects unreachable/off-track pads and pre-solved starts, and requires a real velocity reversal (`s ≠ d`) for the Card 5 trap.
 
 ---
 
-### Step 5 → Widget #6: `<FormulaBalancer />` v2 (Phone-Only)
+### Step 5 Next → Widget #6: `<FormulaBalancer />` v2 (Phone-Only)
 **Syllabus Target:** HSC Physics 1st Paper, Chapter 6 (*মহাকর্ষ ও অভিকর্ষ — ব্যস্তবর্গীয় সূত্র ও উচ্চতা*)
 
 - **One-Thumb Cosmic Stage & Live Equation Scaling:**

@@ -3,6 +3,7 @@ import { ProjectileCardPropsSchema } from '@/widgets/ProjectileSim/ProjectileSim
 import { VectorRiverBoatPropsSchema } from '@/widgets/VectorRiverBoatSim/VectorRiverBoatSim.schema';
 import { KirchhoffPropsSchema } from '@/widgets/KirchhoffCircuitBoard/KirchhoffCircuitBoard.schema';
 import { RayOpticsPropsSchema } from '@/widgets/RayOpticsCanvas/RayOpticsCanvas.schema';
+import { KinematicsGraphPropsSchema } from '@/widgets/KinematicsGraphMatcher/KinematicsGraphMatcher.schema';
 
 export const BilingualTextSchema = z.object({
   en: z.string().min(1).max(180),
@@ -150,6 +151,21 @@ export const RayOpticsLessonManifestSchema = z.object({
   cards: z.array(RayOpticsLessonCardSchema).length(6),
 });
 
+export const KinematicsLessonCardSchema = createLessonCardSchema(KinematicsGraphPropsSchema);
+
+export const KinematicsLessonManifestSchema = z.object({
+  lessonId: z.string().regex(/^[a-z0-9-]+$/),
+  wedge: z.literal('ssc-hsc-physics'),
+  paper: z.union([z.literal(1), z.literal(2)]),
+  chapterNumber: z.number().int().min(1).max(14),
+  chapterTitle: BilingualTextSchema,
+  lessonTitle: BilingualTextSchema,
+  widgetType: z.literal('KinematicsGraphMatcher'),
+  estimatedMinutes: z.number().min(4).max(12),
+  boardExamTag: z.string(),
+  cards: z.array(KinematicsLessonCardSchema).length(6),
+});
+
 export type LessonManifest = z.infer<typeof LessonManifestSchema>;
 export type LessonCard = z.infer<typeof LessonCardSchema>;
 export type RiverBoatLessonManifest = z.infer<typeof RiverBoatLessonManifestSchema>;
@@ -158,3 +174,5 @@ export type KirchhoffLessonManifest = z.infer<typeof KirchhoffLessonManifestSche
 export type KirchhoffLessonCard = z.infer<typeof KirchhoffLessonCardSchema>;
 export type RayOpticsLessonManifest = z.infer<typeof RayOpticsLessonManifestSchema>;
 export type RayOpticsLessonCard = z.infer<typeof RayOpticsLessonCardSchema>;
+export type KinematicsLessonManifest = z.infer<typeof KinematicsLessonManifestSchema>;
+export type KinematicsLessonCard = z.infer<typeof KinematicsLessonCardSchema>;

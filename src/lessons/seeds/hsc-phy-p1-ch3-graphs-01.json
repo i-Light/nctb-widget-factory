@@ -13,14 +13,14 @@
   },
   "widgetType": "KinematicsGraphMatcher",
   "estimatedMinutes": 6,
-  "boardExamTag": "Cumilla & Rajshahi Board SSC/HSC Physics Graph CQ",
+  "boardExamTag": "Rajshahi & Cumilla Board HSC Physics 1st Paper Graph CQ",
   "cards": [
     {
       "cardNumber": 1,
       "cardStage": "zero_fail_toy",
       "prompt": {
-        "en": "Drag v₁ (at 4 s) and v₂ (at 8 s) on the v-t curve! Watch slope give acceleration a and shaded area give displacement s.",
-        "bn": "v-t লেখচিত্রে ৪ সেকেন্ডে v₁ এবং ৮ সেকেন্ডে v₂ পরিবর্তন করে দেখো কীভাবে ঢাল থেকে ত্বরণ a এবং ক্ষেত্রফল থেকে সরণ s পাওয়া যায়!"
+        "en": "Drag the v₁ and v₂ dots, then DRIVE! Slope is acceleration, area is displacement.",
+        "bn": "v₁ ও v₂ বিন্দু টেনে DRIVE চাপো! ঢাল মানে ত্বরণ, ক্ষেত্রফল মানে সরণ।"
       },
       "widgetProps": {
         "mode": "explore",
@@ -28,44 +28,225 @@
         "initialV0": 0,
         "initialV1": 15,
         "initialV2": 10,
-        "velocityBounds": {
-          "min": 0,
-          "max": 20,
-          "step": 5
-        },
-        "lockedNodes": [
-          "v0"
-        ],
+        "velocityBounds": { "min": 0, "max": 20, "step": 5 },
+        "lockedNodes": ["v0"],
         "requireZeroStage2Accel": false,
-        "tolerance": 0.5
+        "tolerance": 0.5,
+        "trackMeters": { "min": 0, "max": 120 }
+      }
+    },
+    {
+      "cardNumber": 2,
+      "cardStage": "prediction_hook",
+      "prompt": {
+        "en": "EV: 0 → 20 m/s in 4 s, then brakes to rest in 4 s. Distance?",
+        "bn": "EV ৪ সেকেন্ডে 0 → 20 m/s, তারপর ৪ সেকেন্ডে ব্রেক কষে থামে। কত দূর গেল?"
+      },
+      "options": [
+        { "en": "160 m (20 × 8)", "bn": "160 m (20 × 8)" },
+        { "en": "80 m", "bn": "80 m" },
+        { "en": "40 m", "bn": "40 m" }
+      ],
+      "correctOptionIndex": 1,
+      "widgetProps": {
+        "mode": "predict",
+        "stageDurationSec": 4,
+        "initialV0": 0,
+        "initialV1": 20,
+        "initialV2": 0,
+        "velocityBounds": { "min": 0, "max": 20, "step": 5 },
+        "lockedNodes": ["v0", "v1", "v2"],
+        "requireZeroStage2Accel": false,
+        "tolerance": 0.5,
+        "trackMeters": { "min": 0, "max": 120 }
+      }
+    },
+    {
+      "cardNumber": 3,
+      "cardStage": "formula_lock_in",
+      "prompt": {
+        "en": "Tap tiles to build the v-t trapezoid area: displacement s =",
+        "bn": "টাইল ট্যাপ করে v-t ট্রাপিজিয়ামের ক্ষেত্রফল থেকে সরণ সাজাও: s ="
+      },
+      "targetFormulaLatex": "s = \\frac{(u + v)\\,t}{2}",
+      "availableTokens": ["(u + v) × t", "2", "u × v", "v − u"],
+      "correctTokenOrder": ["(u + v) × t", "2"],
+      "seeWhySteps": [
+        {
+          "title": { "en": "1. Area under a straight v-t line", "bn": "১. সরল v-t রেখার নিচের ক্ষেত্রফল" },
+          "latex": "s = \\underbrace{u\\,t}_{\\text{rectangle}} + \\underbrace{\\tfrac{1}{2}(v - u)\\,t}_{\\text{triangle}}",
+          "note": {
+            "en": "Split the trapezoid into a rectangle (height u) and a triangle (height v − u).",
+            "bn": "ট্রাপিজিয়ামটিকে একটি আয়তক্ষেত্র (উচ্চতা u) ও একটি ত্রিভুজে (উচ্চতা v − u) ভাগ করো।"
+          }
+        },
+        {
+          "title": { "en": "2. Combine the two pieces", "bn": "২. দুই অংশ যোগ করো" },
+          "latex": "s = u\\,t + \\tfrac{1}{2}(v - u)\\,t = \\frac{(u + v)\\,t}{2} = u\\,t + \\tfrac{1}{2}a\\,t^2",
+          "note": {
+            "en": "Average velocity × time. With v = u + at it is the familiar s = ut + ½at².",
+            "bn": "গড় বেগ × সময়। v = u + at বসালে পরিচিত s = ut + ½at² পাওয়া যায়।"
+          }
+        }
+      ],
+      "widgetProps": {
+        "mode": "formula",
+        "stageDurationSec": 4,
+        "initialV0": 5,
+        "initialV1": 15,
+        "initialV2": 15,
+        "velocityBounds": { "min": 0, "max": 20, "step": 5 },
+        "lockedNodes": ["v0"],
+        "requireZeroStage2Accel": false,
+        "tolerance": 0.5,
+        "trackMeters": { "min": 0, "max": 140 }
       }
     },
     {
       "cardNumber": 4,
       "cardStage": "guided_manipulation",
       "prompt": {
-        "en": "Starting from rest (v₀ = 0), accelerate for 4 s then cruise at constant velocity (a₂ = 0) to cover exactly s = 60 m in 8 s!",
-        "bn": "স্থির অবস্থান (v₀ = 0) থেকে ৪ সেকেন্ড সমত্বরণে ও পরের ৪ সেকেন্ড সমবেগে (a₂ = 0) চলে মোট s = 60 m সরণ অর্জন করো!"
+        "en": "Drive from rest and stop on the 60 m charging pad at t = 8 s!",
+        "bn": "স্থির অবস্থা থেকে চালিয়ে t = 8 s-এ ঠিক 60 m চার্জিং প্যাডে থামাও!"
       },
       "requiresSubscriptionOnFreeLink": true,
+      "seeWhySteps": [
+        {
+          "title": { "en": "Two triangles of equal width", "bn": "সমান ভূমির দুটি ত্রিভুজ" },
+          "latex": "s = \\tfrac{1}{2}\\,v_1 \\cdot 4 + \\tfrac{1}{2}\\,v_1 \\cdot 4 = 4\\,v_1 = 60 \\implies v_1 = 15\\text{ m/s},\\; v_2 = 0",
+          "note": {
+            "en": "Stopping means v₂ = 0, so the area is one big triangle of height v₁.",
+            "bn": "থামা মানে v₂ = 0, তাই ক্ষেত্রফল v₁ উচ্চতার একটি বড় ত্রিভুজ।"
+          }
+        }
+      ],
       "widgetProps": {
         "mode": "target_puzzle",
         "stageDurationSec": 4,
         "initialV0": 0,
-        "initialV1": 15,
+        "initialV1": 10,
         "initialV2": 5,
-        "velocityBounds": {
-          "min": 0,
-          "max": 20,
-          "step": 5
-        },
-        "lockedNodes": [
-          "v0"
-        ],
-        "requireZeroStage2Accel": true,
+        "velocityBounds": { "min": 0, "max": 20, "step": 5 },
+        "lockedNodes": ["v0"],
+        "requireZeroStage2Accel": false,
         "targetDisplacementMeters": 60,
-        "tolerance": 0.5
+        "targetFinalVelocity": 0,
+        "tolerance": 0.5,
+        "trackMeters": { "min": 0, "max": 120 }
       }
+    },
+    {
+      "cardNumber": 5,
+      "cardStage": "exam_trap",
+      "prompt": {
+        "en": "RAJSHAHI BOARD: v goes 10 → 0 → −10 m/s over 8 s. Find the displacement!",
+        "bn": "রাজশাহী বোর্ড: ৮ সেকেন্ডে বেগ 10 → 0 → −10 m/s হয়। সরণ নির্ণয় করো!"
+      },
+      "boardReference": "Rajshahi Board HSC Physics 1st Paper CQ #3 (Turnaround)",
+      "options": [
+        {
+          "label": { "en": "40 m — add both triangle areas", "bn": "40 m — দুই ত্রিভুজের ক্ষেত্রফল যোগ" },
+          "isTrapMisconception": true,
+          "feedback": {
+            "en": "That's the odometer DISTANCE! The red ghost drives 40 m, but the real EV comes back to start.",
+            "bn": "এটি তো অতিক্রান্ত দূরত্ব! লাল ছায়া-গাড়ি 40 m যায়, কিন্তু আসল EV শুরুর বিন্দুতে ফিরে আসে।"
+          }
+        },
+        {
+          "label": { "en": "0 m — +20 m forward, then −20 m back", "bn": "0 m — +20 m সামনে, তারপর −20 m পেছনে" },
+          "isTrapMisconception": false,
+          "feedback": {
+            "en": "Exactly! Area below the axis is negative: +20 m − 20 m = 0 m, though the odometer reads 40 m.",
+            "bn": "একদম ঠিক! অক্ষের নিচের ক্ষেত্রফল ঋণাত্মক: +20 m − 20 m = 0 m, যদিও দূরত্ব 40 m।"
+          }
+        },
+        {
+          "label": { "en": "20 m — only the first triangle counts", "bn": "20 m — শুধু প্রথম ত্রিভুজ গণ্য" },
+          "isTrapMisconception": true,
+          "feedback": {
+            "en": "The reverse trip still happened! The coral −20 m block pulls the EV back to 0 m.",
+            "bn": "পেছনে ফেরাও তো ঘটেছে! লাল −20 m ক্ষেত্রটি EV-কে 0 m-এ ফিরিয়ে আনে।"
+          }
+        }
+      ],
+      "correctOptionIndex": 1,
+      "seeWhySteps": [
+        {
+          "title": { "en": "1. Signed areas", "bn": "১. চিহ্নযুক্ত ক্ষেত্রফল" },
+          "latex": "s = \\tfrac{1}{2}(10)(4) + \\tfrac{1}{2}(-10)(4) = 20 - 20 = 0\\text{ m}",
+          "note": {
+            "en": "Area below the t-axis means motion in the negative direction.",
+            "bn": "t-অক্ষের নিচের ক্ষেত্রফল মানে ঋণাত্মক দিকে গতি।"
+          }
+        },
+        {
+          "title": { "en": "2. Distance uses |area|", "bn": "২. দূরত্বে |ক্ষেত্রফল| নিতে হয়" },
+          "latex": "d = |20| + |-20| = 40\\text{ m} \\neq s",
+          "note": {
+            "en": "Displacement is a vector; distance is a scalar odometer reading.",
+            "bn": "সরণ ভেক্টর রাশি; দূরত্ব স্কেলার, ওডোমিটারের পাঠ।"
+          }
+        }
+      ],
+      "widgetProps": {
+        "mode": "exam_trap",
+        "stageDurationSec": 4,
+        "initialV0": 10,
+        "initialV1": 0,
+        "initialV2": -10,
+        "velocityBounds": { "min": -20, "max": 20, "step": 5 },
+        "lockedNodes": ["v0", "v1", "v2"],
+        "requireZeroStage2Accel": false,
+        "tolerance": 0.5,
+        "trackMeters": { "min": -10, "max": 50 }
+      }
+    },
+    {
+      "cardNumber": 6,
+      "cardStage": "skills_check",
+      "prompt": {
+        "en": "3-MCQ Motion Graph Sprint — Lock in your mastery!",
+        "bn": "গতি লেখচিত্রের ৩টি বোর্ড MCQ স্প্রিন্ট — মাস্টারি লক করো!"
+      },
+      "xpReward": 35,
+      "questions": [
+        {
+          "id": "kg1",
+          "prompt": { "en": "The slope of a velocity-time (v-t) graph gives:", "bn": "বেগ-সময় (v-t) লেখচিত্রের ঢাল নির্দেশ করে:" },
+          "options": [
+            { "en": "Displacement", "bn": "সরণ" },
+            { "en": "Acceleration", "bn": "ত্বরণ" },
+            { "en": "Distance", "bn": "দূরত্ব" },
+            { "en": "Momentum", "bn": "ভরবেগ" }
+          ],
+          "correctIndex": 1,
+          "explanation": { "en": "a = Δv / Δt, which is exactly the slope of the v-t line.", "bn": "a = Δv / Δt, যা v-t রেখার ঢাল।" }
+        },
+        {
+          "id": "kg2",
+          "prompt": { "en": "A car goes from 0 to 12 m/s uniformly in 6 s. How far does it travel?", "bn": "একটি গাড়ি ৬ সেকেন্ডে সমত্বরণে 0 থেকে 12 m/s বেগ অর্জন করে। কত দূর যায়?" },
+          "options": [
+            { "en": "72 m", "bn": "72 m" },
+            { "en": "12 m", "bn": "12 m" },
+            { "en": "36 m", "bn": "36 m" },
+            { "en": "2 m", "bn": "2 m" }
+          ],
+          "correctIndex": 2,
+          "explanation": { "en": "Triangle area: s = ½ × 12 × 6 = 36 m.", "bn": "ত্রিভুজের ক্ষেত্রফল: s = ½ × 12 × 6 = 36 m।" }
+        },
+        {
+          "id": "kg3",
+          "prompt": { "en": "Part of a v-t graph lies below the t-axis. That part means the body:", "bn": "v-t লেখচিত্রের একটি অংশ t-অক্ষের নিচে। এর অর্থ বস্তুটি:" },
+          "options": [
+            { "en": "Moves in the opposite direction", "bn": "বিপরীত দিকে চলছে" },
+            { "en": "Is at rest", "bn": "স্থির আছে" },
+            { "en": "Is always slowing down", "bn": "সবসময় মন্দীভূত হচ্ছে" },
+            { "en": "Has zero acceleration", "bn": "ত্বরণ শূন্য" }
+          ],
+          "correctIndex": 0,
+          "explanation": { "en": "Negative velocity means motion in the negative direction; that area counts as negative displacement.", "bn": "ঋণাত্মক বেগ মানে বিপরীত দিকে গতি; সেই ক্ষেত্রফল ঋণাত্মক সরণ।" }
+        }
+      ]
     }
   ]
 }
