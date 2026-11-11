@@ -52,7 +52,7 @@ export const KirchhoffBreadboardSvg: React.FC<KirchhoffBreadboardSvgProps> = ({
       <rect x={cx - 28} y={cy - 22} width={56} height={44} rx={10} fill={isSel ? '#134E4A' : '#1E293B'} stroke={editable ? isSel ? '#2DD4BF' : '#F59E0B' : '#64748B'} strokeWidth={isSel ? 2.8 : 2.2} />
       <circle cx={cx - 24} cy={cy} r={4.5} fill="#FBBF24" />
       <circle cx={cx + 24} cy={cy} r={4.5} fill="#FBBF24" />
-      <text x={cx} y={cy - 3} textAnchor="middle" fill="#F8FAFC" fontSize={13} fontWeight={800}>{which === 'R1' ? 'R\u2081' : 'R\u2082'} = {ohms}\u03a9</text>
+      <text x={cx} y={cy - 3} textAnchor="middle" fill="#F8FAFC" fontSize={13} fontWeight={800}>{`${which === 'R1' ? 'R\u2081' : 'R\u2082'} = ${ohms}\u03a9`}</text>
       <text x={cx} y={cy + 13} textAnchor="middle" fill="#5EEAD4" fontSize={12} fontWeight={700}>{branchI.toFixed(1)} A</text>
       {editable && <rect x={cx - 34} y={cy - 26} width={68} height={52} rx={12} fill="transparent" onPointerDown={e => { e.stopPropagation(); onSocketPointerDown(which, e.pointerId, e.clientX, e.currentTarget); }} />}
     </g>;
@@ -65,7 +65,7 @@ export const KirchhoffBreadboardSvg: React.FC<KirchhoffBreadboardSvgProps> = ({
       <div className="rounded-xl border border-slate-700 bg-slate-900/92 px-2.5 py-1 text-[11px] font-extrabold text-slate-100">
         <span className="text-amber-300">{config.supplyVoltage}V</span>
         <span className="mx-1.5 text-slate-600">|</span>
-        <span className="text-teal-300">R={metrics.req.toFixed(1)}\u03a9</span>
+        <span className="text-teal-300">{`R=${metrics.req.toFixed(1)}\u03a9`}</span>
         <span className="mx-1.5 text-slate-600">|</span>
         <span className={isBlown ? 'text-rose-400' : isTargetHit ? 'text-emerald-400' : 'text-sky-300'}>I={isBlown ? '0.0A (BLOWN)' : `${effI.toFixed(1)}A`}</span>
       </div>
@@ -121,7 +121,7 @@ export const KirchhoffBreadboardSvg: React.FC<KirchhoffBreadboardSvgProps> = ({
       </g>}
       {draggingSocket && <g transform={`translate(${sockX}, ${Math.max(46, dragY - 42)})`}>
         <rect x={-64} y={-14} width={128} height={26} rx={10} fill="#0F172A" stroke="#2DD4BF" strokeWidth={2} />
-        <text x={0} y={3} textAnchor="middle" fill="#5EEAD4" fontSize={12.5} fontWeight={800}>{draggingSocket === 'R1' ? 'R\u2081' : 'R\u2082'} = {dragVal}\u03a9 \u00b7 {dragCur.toFixed(1)}A</text>
+        <text x={0} y={3} textAnchor="middle" fill="#5EEAD4" fontSize={12.5} fontWeight={800}>{`${draggingSocket === 'R1' ? 'R\u2081' : 'R\u2082'} = ${dragVal}\u03a9 \u00b7 ${dragCur.toFixed(1)}A`}</text>
       </g>}
       <text x={W / 2} y={H - 12} textAnchor="middle" fill="#94A3B8" fontSize={12} fontWeight={700}>
         {ghostRuns.length > 0 ? `${lang === 'bn' ? '\u0986\u0997\u09c7\u09b0 \u09a4\u09c1\u09b2\u09a8\u09be:' : 'Ghost:'} ${ghostRuns[ghostRuns.length - 1].label}` : config.targetMetric === 'totalCurrent' && config.targetValue !== undefined ? `${lang === 'bn' ? '\u09b2\u0995\u09cd\u09b7\u09cd\u09af:' : 'Target:'} I = ${config.targetValue.toFixed(1)} A` : lang === 'bn' ? '\u09b8\u0995\u09c7\u099f\u09c7 \u099f\u09cd\u09af\u09be\u09aa \u09ac\u09be \u09a1\u09cd\u09b0\u09cd\u09af\u09be\u0997 \u0995\u09b0\u09c7 \u09b0\u09cb\u09a7 \u09ac\u09a6\u09b2\u09be\u0993' : 'Tap or scrub gold sockets to swap \u03a9'}
