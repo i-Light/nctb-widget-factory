@@ -1,4 +1,4 @@
-// Synthesized Web Audio Tactile// Synthesized Web Audio + Android Haptic Engine (0 KB external assets, 100% offline phone PWA ready)
+// Synthesized Web Audio + Android Haptic Engine (0 KB external assets, 100% offline phone PWA ready)
 export class TactileAudio {
   private ctx: AudioContext | null = null;
   public muted = false;
