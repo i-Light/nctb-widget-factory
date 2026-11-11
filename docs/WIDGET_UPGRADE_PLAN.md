@@ -39,23 +39,25 @@ All widget upgrades must obey [`docs/BRILLIANT_DESIGN_AND_UX_PLAYBOOK.md`](./BRI
 
 ---
 
-### Step 2 Next → Widget #3: `<KirchhoffCircuitBoard />` v2 (Phone-Only)
+### Step 2 (COMPLETED) → Widget #3: `<KirchhoffCircuitBoard />` v2 (Phone-Only)
 **Syllabus Target:** HSC Physics 2nd Paper, Chapter 3 (*চলতড়িৎ — শ্রেণি/সমান্তরাল ও হুইটস্টোন ব্রিজ*)
 
-- **One-Thumb On-Canvas Manipulation:**
-  - Portrait-stacked glowing breadboard schematic (`viewBox="0 0 360 280"`) with large **`52×44px` Snap-In Gold Terminal Sockets**—tap a resistor pill (`3Ω, 6Ω, 12Ω, 24Ω`) in the bottom thumb tray then tap a glowing socket (or drag directly with `40px` above-thumb value callout), plus a chunky thumb-toggle Series/Parallel knife switch.
-- **60fps Visuals & Riding X-Ray Layer:**
-  - **Animated Electron Drift Beads** racing around closed loops at speeds proportional to branch current `I_k = V / R_k` (`3Ω` branch visibly moves `2×` faster than `6Ω`), wire glow scaled by `P = I²R`, and a 1-tap `Node V` X-Ray pill (`12V`, `6V`, `0V`).
-- **Card 3 Phone Formula Builder:**
+- [x] **One-Thumb On-Canvas Manipulation:**
+  - Portrait-stacked glowing breadboard schematic (`viewBox="0 0 360 280"`, `/play/kirchhoff`) with large **`56×44px` Snap-In Gold Terminal Sockets** (`68×52px` hit zones, `touch-action: none`)—tap a resistor pill (`3Ω, 6Ω, 12Ω, 24Ω`) in the bottom thumb tray or scrub sockets directly with a **`42px` above-thumb value callout**, plus a chunky thumb-toggle Series/Parallel knife switch.
+- [x] **60fps Visuals & Riding X-Ray Layer:**
+  - **Animated Electron Drift Beads** racing around closed loops at speeds proportional to branch current `I_k = V / R_k` (`3Ω` branch visibly moves `2×` faster than `6Ω`, pausing on `document.hidden`), wire glow scaled by `P = I²R`, and a 1-tap `Node V` X-Ray pill (`12V`, `6V`, `0V`).
+- [x] **Card 3 Phone Formula Builder:**
   - Stacked magnetic fraction `R_p =` `[ R₁ × R₂ ]` / `[ R₁ + R₂ ]` + bottom-sheet KCL node proof.
-- **Card 4 Fuse-Protected Target Challenge:**
-  - Hit `I = 6.0 A` (`12V` source) **without blowing the `7.0 A` glass fuse** (`3Ω ∥ 3Ω = 1.5Ω → 8.0A` sparks the fuse with a 1-tap thumb breaker reset).
-- **Card 5 Dual-Galvanometer Misconception Replay (Dhaka Board Wheatstone Shunt Trap):**
+- [x] **Card 4 Fuse-Protected Target Challenge:**
+  - Hit `I = 6.0 A` (`12V` source) **without blowing the `7.0 A` glass fuse** (`3Ω ∥ 3Ω = 1.5Ω → 8.0A` snaps the fuse with a 1-tap thumb breaker reset).
+- [x] **Card 5 Dual-Galvanometer Misconception Replay (Dhaka Board Wheatstone Shunt Trap):**
   - Portrait diamond Wheatstone Bridge (`P=4Ω, Q=8Ω, R=6Ω, S₁=24Ω`) with spring-physics Galvanometer needle `G`—contrasting `12Ω` Series (`S=36Ω`, needle slams red) against `24Ω` Parallel Shunt (`24Ω ∥ 24Ω = 12Ω`, `I_g = 0.00 A`).
+- [x] **Gate 2 `.eval.ts` Verification:**
+  - Verifies 6-card phone prompt cap (`≤ 16 words`), `7.0A` fuse-safe `6.0A` reachability, Wheatstone bridge shunt balance (`V_B = V_D = 8.0V`), and rejects target currents exceeding `maxFuseCurrent`.
 
 ---
 
-### Step 3 → Widget #4: `<RayOpticsCanvas />` v2 (Phone-Only)
+### Step 3 Next → Widget #4: `<RayOpticsCanvas />` v2 (Phone-Only)
 **Syllabus Target:** HSC Physics 2nd Paper, Chapter 6 & SSC Physics Chapter 9 (*জ্যামিতিক আলোকবিজ্ঞান — লেন্স ও বিবর্ধন*)
 
 - **One-Thumb On-Canvas Manipulation:**
