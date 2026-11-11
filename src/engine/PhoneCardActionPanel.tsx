@@ -4,10 +4,10 @@ import React from 'react';
 import { BookOpen, Check, ChevronRight, Sparkles } from 'lucide-react';
 import { sfx } from './audio';
 import { MathFrac } from './MathFrac';
-import type { LessonCard, RiverBoatLessonCard } from './schema';
+import type { KirchhoffLessonCard, LessonCard, RiverBoatLessonCard } from './schema';
 export const PhoneCardActionPanel: React.FC<{
-  card: LessonCard | RiverBoatLessonCard;
-  widgetType: 'ProjectileSim' | 'VectorRiverBoatSim';
+  card: LessonCard | RiverBoatLessonCard | KirchhoffLessonCard;
+  widgetType: 'ProjectileSim' | 'VectorRiverBoatSim' | 'KirchhoffCircuitBoard';
   lang: 'en' | 'bn';
   toyRuns: number;
   selectedPredIdx: number | null;
@@ -42,9 +42,9 @@ export const PhoneCardActionPanel: React.FC<{
       {filledTokens[slotIdx] ?? '?'}
     </button>;
   if (card.cardStage === 'zero_fail_toy') {
-    return <div className="flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-white p-2.5">
+    return <div className="flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-[#FFFFFF] p-2.5">
         <p className="text-xs font-semibold text-slate-600">
-          {toyRuns === 0 ? lang === 'bn' ? 'প্রথমবার চালিয়ে গতিপথ দেখো!' : 'Run once to leave a ghost wake trail!' : lang === 'bn' ? `${toyRuns} বার চালানো হয়েছে — কোণ বদলে তুলনা করো!` : `${toyRuns} run${toyRuns > 1 ? 's' : ''} logged — compare ghost trails!`}
+          {toyRuns === 0 ? lang === 'bn' ? 'প্রথমবার চালিয়ে তুলনা দেখো!' : 'Log a run to leave a ghost comparison!' : lang === 'bn' ? `${toyRuns} বার লগ হয়েছে — মান বদলে তুলনা করো!` : `${toyRuns} run${toyRuns > 1 ? 's' : ''} logged — compare ghost readings!`}
         </p>
         <button type="button" onClick={onNextCard} className="flex min-h-[44px] shrink-0 items-center gap-1 rounded-xl border-b-4 border-teal-800 bg-teal-600 px-3.5 text-xs font-extrabold text-white active:translate-y-1 active:border-b-0 touch-manipulation">
           <span>{lang === 'bn' ? 'পরবর্তী' : 'NEXT'}</span>
@@ -65,19 +65,20 @@ export const PhoneCardActionPanel: React.FC<{
         })}
         </div>
         {selectedPredIdx === card.correctOptionIndex && <button type="button" onClick={onNextCard} className="flex min-h-[48px] w-full items-center justify-center gap-1.5 rounded-2xl border-b-4 border-emerald-700 bg-emerald-500 text-sm font-extrabold text-white active:translate-y-1 active:border-b-0 touch-manipulation">
-            <span>{lang === 'bn' ? 'সূত্র আবিষ্কার করো' : 'UNLOCK FORMULA'}</span>
+            <span>
+              {lang === 'bn' ? 'সূত্র আবিষ্কার করো' : 'UNLOCK FORMULA'}
+            </span>
             <ChevronRight className="h-4 w-4" />
           </button>}
       </div>;
   }
   if (card.cardStage === 'formula_lock_in') {
+    const formulaPrefix = widgetType === 'VectorRiverBoatSim' ? 'cos α = −' : widgetType === 'KirchhoffCircuitBoard' ? 'R_p =' : 'H =';
     return <div className="space-y-2 rounded-2xl border border-slate-200 bg-white p-3 shadow-xs">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-base font-extrabold text-slate-900">
-            <span className="font-serif italic">
-              {widgetType === 'VectorRiverBoatSim' ? 'cos α = −' : 'H ='}
-            </span>
-            {card.correctTokenOrder.length === 2 ? <MathFrac num={renderSlotBtn(0, 'min-w-[74px]')} den={renderSlotBtn(1, 'min-w-[74px]')} /> : <MathFrac num={<div className="flex items-center gap-1">
+            <span className="font-serif italic">{formulaPrefix}</span>
+            {card.correctTokenOrder.length === 2 ? <MathFrac num={renderSlotBtn(0, 'min-w-[84px]')} den={renderSlotBtn(1, 'min-w-[84px]')} /> : <MathFrac num={<div className="flex items-center gap-1">
                     {renderSlotBtn(0, 'min-w-[66px]')}
                     {renderSlotBtn(1, 'min-w-[66px]')}
                   </div>} den={renderSlotBtn(2, 'min-w-[76px]')} />}
@@ -94,7 +95,7 @@ export const PhoneCardActionPanel: React.FC<{
         <div className="grid grid-cols-4 gap-1.5">
           {card.availableTokens.map(tok => {
           const used = filledTokens.includes(tok);
-          return <button key={tok} type="button" disabled={used} onClick={() => onFillToken(tok, card.correctTokenOrder)} className={`min-h-[48px] rounded-xl border-b-2 text-sm font-extrabold transition touch-manipulation ${used ? 'border-slate-200 bg-slate-100 text-slate-300' : 'border-slate-300 bg-slate-50 text-slate-900 active:translate-y-0.5 active:border-b-0'}`}>
+          return <button key={tok} type="button" disabled={used} onClick={() => onFillToken(tok, card.correctTokenOrder)} className={`min-h-[48px] rounded-xl border-b-2 px-1 text-xs font-extrabold transition touch-manipulation ${used ? 'border-slate-200 bg-slate-100 text-slate-300' : 'border-slate-300 bg-slate-50 text-slate-900 active:translate-y-0.5 active:border-b-0'}`}>
                 {tok}
               </button>;
         })}
@@ -104,7 +105,9 @@ export const PhoneCardActionPanel: React.FC<{
             {lang === 'bn' ? 'স্লটে ট্যাপ করে টাইল সরিয়ে আবার সাজাও!' : 'Tap a filled slot to swap tokens!'}
           </p>}
         {formulaChecked === true && <button type="button" onClick={onNextCard} className="flex min-h-[48px] w-full items-center justify-center gap-1.5 rounded-2xl border-b-4 border-emerald-700 bg-emerald-500 text-sm font-extrabold text-white active:translate-y-1 active:border-b-0 touch-manipulation">
-            <span>{lang === 'bn' ? 'চ্যালেঞ্জে যাও' : 'START TARGET CHALLENGE'}</span>
+            <span>
+              {lang === 'bn' ? 'চ্যালেঞ্জে যাও' : 'START TARGET CHALLENGE'}
+            </span>
             <ChevronRight className="h-4 w-4" />
           </button>}
       </div>;
@@ -114,7 +117,9 @@ export const PhoneCardActionPanel: React.FC<{
         {puzzleSolved ? <div className="flex items-center justify-between gap-2 rounded-2xl border-2 border-emerald-500 bg-emerald-50 p-2.5">
             <div className="flex items-center gap-2 text-xs font-extrabold text-emerald-950">
               <Sparkles className="h-4 w-4 shrink-0 text-emerald-600" />
-              <span>{lang === 'bn' ? 'বুলসআই! নিখুঁত কোণে লক্ষ্যভেদ করেছ!' : 'Bullseye! Obstacle cleared right into target!'}</span>
+              <span>
+                {lang === 'bn' ? 'বুলসআই! নিখুঁত মান বেছে লক্ষ্যভেদ করেছ!' : 'Bullseye! Target locked without tripping limits!'}
+              </span>
             </div>
             <button type="button" onClick={onNextCard} className="flex min-h-[44px] shrink-0 items-center gap-1 rounded-xl border-b-4 border-emerald-700 bg-emerald-500 px-3.5 text-xs font-extrabold text-white active:translate-y-1 active:border-b-0 touch-manipulation">
               <span>{lang === 'bn' ? 'বোর্ড ট্র্যাপ' : 'NEXT'}</span>
@@ -136,7 +141,9 @@ export const PhoneCardActionPanel: React.FC<{
           const chosen = selectedTrapIdx === idx;
           return <button key={idx} type="button" onClick={() => onSelectTrap(idx, opt.isTrapMisconception)} className={`flex min-h-[48px] w-full items-center justify-between rounded-xl border-2 border-b-4 px-3.5 text-left text-xs font-extrabold active:translate-y-0.5 active:border-b-2 transition touch-manipulation ${chosen ? opt.isTrapMisconception ? 'border-rose-500 bg-rose-50 text-rose-950' : 'border-emerald-600 bg-emerald-50 text-emerald-950' : 'border-slate-200 bg-white text-slate-800'}`}>
                 <span>{opt.label[lang]}</span>
-                {chosen && (opt.isTrapMisconception ? <span className="rounded bg-rose-200 px-1.5 py-0.5 text-[10px] font-black text-rose-900">TRAP</span> : <Check className="h-4 w-4 text-emerald-600" />)}
+                {chosen && (opt.isTrapMisconception ? <span className="rounded bg-rose-200 px-1.5 py-0.5 text-[10px] font-black text-rose-900">
+                      TRAP
+                    </span> : <Check className="h-4 w-4 text-emerald-600" />)}
               </button>;
         })}
         </div>
@@ -144,7 +151,9 @@ export const PhoneCardActionPanel: React.FC<{
             {card.options[selectedTrapIdx].feedback[lang]}
           </div>}
         {selectedTrapIdx === card.correctOptionIndex && <button type="button" onClick={onNextCard} className="flex min-h-[48px] w-full items-center justify-center gap-1.5 rounded-2xl border-b-4 border-emerald-700 bg-emerald-500 text-sm font-extrabold text-white active:translate-y-1 active:border-b-0 touch-manipulation">
-            <span>{lang === 'bn' ? 'মাস্টারি কুইজ শুরু করো' : 'FINAL 3-MCQ SPRINT'}</span>
+            <span>
+              {lang === 'bn' ? 'মাস্টারি কুইজ শুরু করো' : 'FINAL 3-MCQ SPRINT'}
+            </span>
             <ChevronRight className="h-4 w-4" />
           </button>}
       </div>;
