@@ -3,14 +3,8 @@
   "wedge": "ssc-hsc-physics",
   "paper": 1,
   "chapterNumber": 2,
-  "chapterTitle": {
-    "en": "Vectors: River & Boat Crossing",
-    "bn": "ভেক্টর: নদী ও নৌকার পারাপার"
-  },
-  "lessonTitle": {
-    "en": "Shortest Time vs. Zero Drift & The Perpendicular-Angle Trap",
-    "bn": "ন্যূনতম সময় বনাম ন্যূনতম দূরত্ব ও লম্ব-কোণের বোর্ড ফাঁদ"
-  },
+  "chapterTitle": { "en": "Vectors: River & Boat Crossing", "bn": "ভেক্টর: নদী ও নৌকার পারাপার" },
+  "lessonTitle": { "en": "Shortest Time, Zero Drift & The River-Width Angle Trap", "bn": "সর্বনিম্ন সময়, সোজাসুজি পারাপার ও নদীর প্রস্থের কোণ ট্র্যাপ" },
   "widgetType": "VectorRiverBoatSim",
   "estimatedMinutes": 6,
   "boardExamTag": "Rajshahi & Dhaka Board HSC Physics 1st Paper CQ Ch-2",
@@ -18,10 +12,7 @@
     {
       "cardNumber": 1,
       "cardStage": "zero_fail_toy",
-      "prompt": {
-        "en": "Steer the boat's heading angle α (with the stream u) and sail across! Watch how the river current pushes your landing point.",
-        "bn": "স্রোতের সাথে নৌকার কোণ α স্লাইডারটি ঘুরিয়ে নদী পার হও! স্রোতের টানে নৌকাটি কোথায় গিয়ে পৌঁছায় দেখো।"
-      },
+      "prompt": { "en": "Drag compass helm α and cross! Compare α = 90° against α = 120°.", "bn": "কম্পাস হেল্ম α ঘুরিয়ে নদী পার হও! ৯০° ও ১২০° কোণের পার্থক্য দেখো।" },
       "widgetProps": {
         "mode": "explore",
         "angleReference": "stream",
@@ -29,20 +20,9 @@
         "initialStreamSpeed": 3,
         "initialBoatSpeed": 6,
         "initialHeadingDeg": 90,
-        "boatSpeedBounds": {
-          "min": 4,
-          "max": 8,
-          "step": 2
-        },
-        "headingBounds": {
-          "min": 60,
-          "max": 150,
-          "step": 15
-        },
-        "lockedControls": [
-          "streamSpeed",
-          "boatSpeed"
-        ],
+        "boatSpeedBounds": { "min": 4, "max": 8, "step": 2 },
+        "headingBounds": { "min": 45, "max": 150, "step": 5 },
+        "lockedControls": ["streamSpeed", "boatSpeed"],
         "showVectorParallelogram": true,
         "targetGoal": "none",
         "tolerance": 0.6
@@ -51,23 +31,11 @@
     {
       "cardNumber": 2,
       "cardStage": "prediction_hook",
-      "prompt": {
-        "en": "To cross the 120 m river in the SHORTEST POSSIBLE TIME (v = 6 m/s, u = 3 m/s), which angle α with the stream should you steer?",
-        "bn": "ন্যূনতম সময়ে ১২০ m চওড়া নদী পার হতে (v = 6 m/s, u = 3 m/s) স্রোতের সাথে কত কোণে নৌকা চালাতে হবে?"
-      },
+      "prompt": { "en": "At u=3 m/s and v=6 m/s, which heading α crosses fastest?", "bn": "u=3 m/s ও v=6 m/s হলে কোন কোণে সবচেয়ে দ্রুত পার হবে?" },
       "options": [
-        {
-          "en": "α = 120° (aim upstream)",
-          "bn": "α = 120° (স্রোতের বিপরীতে তীর্যকভাবে)"
-        },
-        {
-          "en": "α = 90° (aim straight across)",
-          "bn": "α = 90° (সোজা লম্বভাবে)"
-        },
-        {
-          "en": "α = 60° (aim downstream)",
-          "bn": "α = 60° (স্রোতের অনুকূলে)"
-        }
+        { "en": "α = 120° (Zero Drift · 23.09s)", "bn": "α = ১২০° (সোজাসুজি পাড়ে)" },
+        { "en": "α = 90° (Straight Across · 20.0s)", "bn": "α = ৯০° (প্রস্থ বরাবর সোজা)" },
+        { "en": "α = 60° (With Current)", "bn": "α = ৬০° (স্রোতের অনুকূলে)" }
       ],
       "correctOptionIndex": 1,
       "widgetProps": {
@@ -77,20 +45,9 @@
         "initialStreamSpeed": 3,
         "initialBoatSpeed": 6,
         "initialHeadingDeg": 120,
-        "boatSpeedBounds": {
-          "min": 6,
-          "max": 6,
-          "step": 2
-        },
-        "headingBounds": {
-          "min": 60,
-          "max": 120,
-          "step": 30
-        },
-        "lockedControls": [
-          "streamSpeed",
-          "boatSpeed"
-        ],
+        "boatSpeedBounds": { "min": 6, "max": 6, "step": 2 },
+        "headingBounds": { "min": 60, "max": 120, "step": 30 },
+        "lockedControls": ["streamSpeed", "boatSpeed"],
         "showVectorParallelogram": true,
         "targetGoal": "min_time",
         "tolerance": 0.6
@@ -99,66 +56,32 @@
     {
       "cardNumber": 3,
       "cardStage": "formula_lock_in",
-      "prompt": {
-        "en": "To reach the EXACT OPPOSITE dock (Zero Drift), horizontal velocity u + v cos α must equal 0. Build the NCTB formula cos α =",
-        "bn": "ঠিক বিপরীত ঘাটে পৌঁছাতে হলে অনুভূমিক লব্ধি বেগ u + v cos α = 0 হতে হয়। সূত্রটি সাজাও: cos α ="
-      },
+      "prompt": { "en": "For zero drift (R_x = 0), tap tiles to build cos α = −", "bn": "সোজাসুজি পারাপারে (R_x = 0) টাইল ট্যাপ করে সাজাও: cos α = −" },
       "targetFormulaLatex": "\\cos\\alpha = -\\frac{u}{v}",
-      "availableTokens": [
-        "−",
-        "u",
-        "÷ v",
-        "÷ u"
-      ],
-      "correctTokenOrder": [
-        "−",
-        "u",
-        "÷ v"
-      ],
+      "availableTokens": ["u", "v", "d", "sin α"],
+      "correctTokenOrder": ["u", "v"],
       "seeWhySteps": [
         {
-          "title": {
-            "en": "1. Cancel horizontal drift along the bank",
-            "bn": "১. তীর বরাবর অনুভূমিক সরণ শূন্য করা"
-          },
+          "title": { "en": "1. Horizontal resultant velocity cancels to zero", "bn": "১. নদীর তীর বরাবর লব্ধি বেগের উপাংশ শূন্য হবে" },
           "latex": "R_x = u + v\\cos\\alpha = 0",
-          "note": {
-            "en": "Boat's upstream component v cos α must exactly balance stream u.",
-            "bn": "নৌকার অনুভূমিক উপাংশ v cos α স্রোতের বেগ u-কে নিষ্ক্রিয় করে।"
-          }
+          "note": { "en": "Upstream thrust v cos α must exactly cancel river stream speed u.", "bn": "নৌকার উজানমুখী উপাংশ v cos α স্রোতের বেগ u-কে সম্পূর্ণ নাকচ করে।" }
         },
         {
-          "title": {
-            "en": "2. Solve for heading angle α (> 90°)",
-            "bn": "২. স্রোতের সাথে কোণ α নির্ণয়"
-          },
+          "title": { "en": "2. Solve for stream heading angle α", "bn": "২. স্রোতের সাথে নৌকার কোণ α নির্ণয়" },
           "latex": "\\cos\\alpha = -\\frac{u}{v} \\implies \\alpha = \\cos^{-1}\\!\\left(-\\frac{u}{v}\\right)",
-          "note": {
-            "en": "Notice this requires boat speed v > stream speed u!",
-            "bn": "লক্ষ্য করো, এর জন্য অবশ্যই নৌকার বেগ v > স্রোতের বেগ u হতে হবে!"
-          }
+          "note": { "en": "Because u < v and cos α < 0, α is always obtuse (90° < α < 180°).", "bn": "যেহেতু cos α ঋণাত্মক এবং u < v, তাই α সর্বদা স্থূলকোণ (৯০° < α < ১৮০°)।" }
         }
       ],
       "widgetProps": {
         "mode": "formula",
         "angleReference": "stream",
         "riverWidth": 120,
-        "initialStreamSpeed": 3,
-        "initialBoatSpeed": 6,
+        "initialStreamSpeed": 4,
+        "initialBoatSpeed": 8,
         "initialHeadingDeg": 120,
-        "boatSpeedBounds": {
-          "min": 4,
-          "max": 8,
-          "step": 2
-        },
-        "headingBounds": {
-          "min": 60,
-          "max": 150,
-          "step": 15
-        },
-        "lockedControls": [
-          "streamSpeed"
-        ],
+        "boatSpeedBounds": { "min": 8, "max": 8, "step": 2 },
+        "headingBounds": { "min": 45, "max": 150, "step": 5 },
+        "lockedControls": ["streamSpeed", "boatSpeed", "heading"],
         "showVectorParallelogram": true,
         "targetGoal": "zero_drift",
         "tolerance": 0.6
@@ -167,11 +90,15 @@
     {
       "cardNumber": 4,
       "cardStage": "guided_manipulation",
-      "prompt": {
-        "en": "Strong current u = 4 m/s! Tune boat speed v and heading α so the boat lands at Drift x = 0.0 m on the opposite dock.",
-        "bn": "স্রোতের বেগ u = 4 m/s! নৌকার বেগ v এবং কোণ α সমন্বয় করে ঠিক বিপরীত ঘাটে (Drift x = 0 m) পৌঁছাও।"
-      },
+      "prompt": { "en": "Monsoon u=4 m/s, rocks at +25m! Pick v and α for 0.0m pier.", "bn": "স্রোত u=4 m/s, +25m দূরে পাথর! v ও α বেছে 0.0m ঘাটে ভিড়াও।" },
       "requiresSubscriptionOnFreeLink": true,
+      "seeWhySteps": [
+        {
+          "title": { "en": "Clear the +25 m rocks with Zero Drift", "bn": "+25 m পাথর এড়িয়ে সোজা বিপরীত ঘাটে পৌঁছানো" },
+          "latex": "\\cos\\alpha = -\\frac{4}{8} = -0.5 \\implies \\alpha = 120^\\circ",
+          "note": { "en": "At v = 8 m/s and α = 120°, R_x = 0 so the boat glides straight up 0.0 m!", "bn": "v = 8 m/s ও α = 120° নিলে R_x = 0 হয়, ফলে নৌকা পাথর এড়িয়ে সোজা ০.০ m ঘাটে ভিড়ে!" }
+        }
+      ],
       "widgetProps": {
         "mode": "target_puzzle",
         "angleReference": "stream",
@@ -179,20 +106,11 @@
         "initialStreamSpeed": 4,
         "initialBoatSpeed": 6,
         "initialHeadingDeg": 90,
-        "boatSpeedBounds": {
-          "min": 4,
-          "max": 8,
-          "step": 2
-        },
-        "headingBounds": {
-          "min": 60,
-          "max": 150,
-          "step": 15
-        },
-        "lockedControls": [
-          "streamSpeed"
-        ],
+        "boatSpeedBounds": { "min": 4, "max": 8, "step": 2 },
+        "headingBounds": { "min": 45, "max": 150, "step": 5 },
+        "lockedControls": ["streamSpeed"],
         "showVectorParallelogram": true,
+        "downstreamRockMeters": 25,
         "targetGoal": "zero_drift",
         "tolerance": 0.6
       }
@@ -200,60 +118,40 @@
     {
       "cardNumber": 5,
       "cardStage": "exam_trap",
-      "prompt": {
-        "en": "BOARD TRAP: Stream u = 3 m/s, boat v = 6 m/s. To reach directly opposite, at what angle upstream WITH THE RIVER WIDTH (PERPENDICULAR) must the boat steer?",
-        "bn": "বোর্ড ফাঁদ: স্রোত u = 3 m/s, নৌকা v = 6 m/s। সোজা বিপরীত বিন্দুতে পৌঁছাতে নদীর প্রস্থের (লম্বের) সাথে কত কোণে নৌকা চালাতে হবে?"
-      },
-      "boardReference": "Rajshahi Board HSC Physics 1st Paper CQ Twist",
+      "prompt": { "en": "RAJSHAHI BOARD: At u=4, v=8 m/s, find zero-drift angle WITH RIVER WIDTH!", "bn": "রাজশাহী বোর্ড: u=4, v=8 m/s হলে নদীর প্রস্থের সাথে সোজা পারাপারের কোণ কত?" },
+      "boardReference": "Rajshahi Board HSC Physics 1st Paper CQ (Width-Angle Twist)",
       "options": [
         {
-          "label": {
-            "en": "120° with the width (blindly writing cos⁻¹(−3/6))",
-            "bn": "প্রস্থের সাথে 120° (সূত্রের α সরাসরি বসিয়ে)"
-          },
+          "label": { "en": "120° with river width", "bn": "নদীর প্রস্থের সাথে ১২০° কোণে" },
           "simulatedAngleDeg": 120,
           "isTrapMisconception": true,
-          "feedback": {
-            "en": "Careful! 120° is the angle with the STREAM (horizontal bank). Subtract 90° to get the angle with the river's perpendicular width!",
-            "bn": "সাবধান! 120° হলো স্রোতের (তীরের) সাথে কোণ। নদীর প্রস্থ বা লম্বের সাথে কোণ বের করতে 120° − 90° = 30° নিতে হবে!"
-          }
+          "feedback": { "en": "Watch both boats! 120° is with the STREAM. Turning 120° past perpendicular points backward! With river width, tilt 120° − 90° = 30° upstream.", "bn": "নৌকা দুটি দেখো! ১২০° হলো স্রোতের সাথে কোণ। প্রস্থের সাথে ১২০° ঘুরালে নৌকা উল্টো তীরে ফেরে! প্রস্থের সাথে কোণ = ১২০° − ৯০° = ৩০° উজানে।" }
         },
         {
-          "label": {
-            "en": "30° upstream from perpendicular (since α_stream = 120°)",
-            "bn": "প্রস্থের (লম্বের) সাথে 30° কোণে (যেহেতু α = 120°)"
-          },
+          "label": { "en": "30° upstream from river width", "bn": "নদীর প্রস্থের সাথে ৩০° উজানে" },
           "simulatedAngleDeg": 30,
           "isTrapMisconception": false,
-          "feedback": {
-            "en": "Nailed it! α = 120° with stream = 90° + 30°, so it makes a 30° angle with the perpendicular river width.",
-            "bn": "একদম ঠিক! স্রোতের সাথে 120° মানে লম্ব বা প্রস্থের সাথে 120° − 90° = 30° কোণ।"
-          }
+          "feedback": { "en": "Spot on! Stream angle α = 120°, and river width is at 90°, so angle with width = 120° − 90° = 30° upstream.", "bn": "একদম সঠিক! স্রোতের সাথে কোণ α = ১২০° এবং প্রস্থ ৯০° লম্ব বরাবর, তাই প্রস্থের সাথে কোণ = ১২০° − ৯০° = ৩০° উজানে।" }
         }
       ],
       "correctOptionIndex": 1,
+      "seeWhySteps": [
+        {
+          "title": { "en": "Subtract 90° when question asks angle with River Width", "bn": "নদীর প্রস্থের সাথে কোণ চাইলে ৯০° বিয়োগ করো" },
+          "latex": "\\theta_{\\text{width}} = \\alpha - 90^\\circ = 120^\\circ - 90^\\circ = 30^\\circ",
+          "note": { "en": "Equivalently, sin θ_width = u / v = 4 / 8 = 0.5 ⇒ θ_width = 30°.", "bn": "বিকল্পভাবে, প্রস্থের সাথে কোণ θ হলে sin θ = u / v = 4 / 8 = 0.5 ⇒ θ = ৩০°।" }
+        }
+      ],
       "widgetProps": {
         "mode": "exam_trap",
         "angleReference": "perpendicular",
         "riverWidth": 120,
-        "initialStreamSpeed": 3,
-        "initialBoatSpeed": 6,
+        "initialStreamSpeed": 4,
+        "initialBoatSpeed": 8,
         "initialHeadingDeg": 30,
-        "boatSpeedBounds": {
-          "min": 6,
-          "max": 6,
-          "step": 2
-        },
-        "headingBounds": {
-          "min": 15,
-          "max": 60,
-          "step": 15
-        },
-        "lockedControls": [
-          "streamSpeed",
-          "boatSpeed",
-          "heading"
-        ],
+        "boatSpeedBounds": { "min": 8, "max": 8, "step": 2 },
+        "headingBounds": { "min": 0, "max": 60, "step": 5 },
+        "lockedControls": ["streamSpeed", "boatSpeed", "heading"],
         "showVectorParallelogram": true,
         "targetGoal": "zero_drift",
         "tolerance": 0.6
@@ -262,101 +160,44 @@
     {
       "cardNumber": 6,
       "cardStage": "skills_check",
-      "prompt": {
-        "en": "Rapid 3-MCQ River-Boat Check — Lock in +30 XP!",
-        "bn": "দ্রুত ৩টি নদী-নৌকা বোর্ড MCQ যাচাই — +30 XP অর্জন করো!"
-      },
-      "xpReward": 30,
+      "prompt": { "en": "3-MCQ River-Boat Sprint — Lock in your mastery!", "bn": "নদী-নৌকা ৩টি বোর্ড MCQ স্প্রিন্ট — মাস্টারি লক করো!" },
+      "xpReward": 35,
       "questions": [
         {
-          "id": "rb1",
-          "prompt": {
-            "en": "A river is 100 m wide, stream u = 4 m/s, boat v = 5 m/s. What is the MINIMUM time needed to cross?",
-            "bn": "১০০ m চওড়া নদীতে স্রোত u = 4 m/s এবং নৌকার বেগ v = 5 m/s হলে ন্যূনতম পারাপার সময় কত?"
-          },
+          "id": "rb_q1",
+          "prompt": { "en": "A 180 m wide river has stream u = 4 m/s. A boat (v = 6 m/s) crosses in minimum time. How long does it take?", "bn": "১৮০ মিটার চওড়া নদীতে স্রোত u = 4 m/s। ৬ m/s বেগের নৌকা সর্বনিম্ন সময়ে নদী পার হলে কত সময় লাগবে?" },
           "options": [
-            {
-              "en": "20 s",
-              "bn": "20 s"
-            },
-            {
-              "en": "25 s",
-              "bn": "25 s"
-            },
-            {
-              "en": "33.3 s",
-              "bn": "33.3 s"
-            },
-            {
-              "en": "11.1 s",
-              "bn": "11.1 s"
-            }
-          ],
-          "correctIndex": 0,
-          "explanation": {
-            "en": "At α = 90°, t_min = d / v = 100 / 5 = 20 s (independent of stream speed u!).",
-            "bn": "α = 90° কোণে t_min = d / v = 100 / 5 = 20 s (যা স্রোতের বেগের ওপর নির্ভর করে না)।"
-          }
-        },
-        {
-          "id": "rb2",
-          "prompt": {
-            "en": "When v = 5 m/s and u = 3 m/s, what is the boat's resultant speed straight across (shortest path)?",
-            "bn": "নৌকার বেগ v = 5 m/s ও স্রোত u = 3 m/s হলে ন্যূনতম পথে লব্ধি বেগ কত?"
-          },
-          "options": [
-            {
-              "en": "2 m/s",
-              "bn": "2 m/s"
-            },
-            {
-              "en": "4 m/s",
-              "bn": "4 m/s"
-            },
-            {
-              "en": "5.83 m/s",
-              "bn": "5.83 m/s"
-            },
-            {
-              "en": "8 m/s",
-              "bn": "8 m/s"
-            }
+            { "en": "18 s", "bn": "১৮ সেকেন্ড" },
+            { "en": "30 s", "bn": "৩০ সেকেন্ড" },
+            { "en": "45 s", "bn": "৪৫ সেকেন্ড" },
+            { "en": "90 s", "bn": "৯০ সেকেন্ড" }
           ],
           "correctIndex": 1,
-          "explanation": {
-            "en": "Along the shortest path, R = √(v² − u²) = √(25 − 9) = √16 = 4 m/s.",
-            "bn": "ন্যূনতম পথে লব্ধি বেগ R = √(v² − u²) = √(25 − 9) = 4 m/s।"
-          }
+          "explanation": { "en": "Minimum time uses α = 90°, independent of stream u: t_min = d / v = 180 / 6 = 30 s.", "bn": "সর্বনিম্ন সময়ে α = ৯০° এবং স্রোতের বেগ u সময়কে প্রভাবিত করে না: t_min = d / v = 180 / 6 = 30 s।" }
         },
         {
-          "id": "rb3",
-          "prompt": {
-            "en": "If stream speed u = 8 m/s and boat speed v = 5 m/s, can the boat reach the exact opposite point?",
-            "bn": "স্রোতের বেগ u = 8 m/s এবং নৌকার বেগ v = 5 m/s হলে নৌকাটি কি ঠিক বিপরীত বিন্দুতে পৌঁছাতে পারবে?"
-          },
+          "id": "rb_q2",
+          "prompt": { "en": "If stream speed u = 5 m/s and boat speed v = 10 m/s, what stream angle α gives zero drift?", "bn": "স্রোতের বেগ u = 5 m/s এবং নৌকার বেগ v = 10 m/s হলে স্রোতের সাথে কত কোণে সোজাসুজি পার হওয়া যাবে?" },
           "options": [
-            {
-              "en": "Yes, at α = 120°",
-              "bn": "হ্যাঁ, α = 120° কোণে"
-            },
-            {
-              "en": "Yes, at α = 150°",
-              "bn": "হ্যাঁ, α = 150° কোণে"
-            },
-            {
-              "en": "Impossible (u > v)",
-              "bn": "অসম্ভব (কারণ u > v)"
-            },
-            {
-              "en": "Yes, at α = 90°",
-              "bn": "হ্যাঁ, α = 90° কোণে"
-            }
+            { "en": "60°", "bn": "৬০°" },
+            { "en": "90°", "bn": "৯০°" },
+            { "en": "120°", "bn": "১২০°" },
+            { "en": "150°", "bn": "১৫০°" }
           ],
           "correctIndex": 2,
-          "explanation": {
-            "en": "cos α = −u/v = −8/5 = −1.6, which is impossible since |cos α| ≤ 1.",
-            "bn": "cos α = −8/5 = −1.6, যা অসম্ভব কারণ |cos α|-এর মান কখনো ১-এর বেশি হতে পারে না।"
-          }
+          "explanation": { "en": "cos α = −u / v = −5 / 10 = −0.5 ⇒ α = 120°.", "bn": "cos α = −u / v = −5 / 10 = −0.5 ⇒ α = ১২০°।" }
+        },
+        {
+          "id": "rb_q3",
+          "prompt": { "en": "Why can a boat with v = 3 m/s NEVER land straight across when river current is u = 4 m/s?", "bn": "নদীর স্রোত u = 4 m/s হলে v = 3 m/s বেগের নৌকা কেন কখনোই সোজা বিপরীত ঘাটে পৌঁছাতে পারে না?" },
+          "options": [
+            { "en": "River width d is unknown", "bn": "নদীর প্রস্থ d অজানা" },
+            { "en": "|cos α| = 4/3 > 1 is impossible", "bn": "|cos α| = 4/3 > 1 যা অসম্ভব" },
+            { "en": "Crossing time becomes zero", "bn": "পারাপারের সময় শূন্য হয়ে যায়" },
+            { "en": "sin α becomes negative", "bn": "sin α ঋণাত্মক হয়ে যায়" }
+          ],
+          "correctIndex": 1,
+          "explanation": { "en": "Even aiming 180° straight upstream, net velocity is 4 − 3 = +1 m/s downstream; cos α = −4/3 has no real angle.", "bn": "পুরো উজানে চালালেও লব্ধি বেগ স্রোতের দিকে 4 − 3 = +1 m/s থাকে; cos α = −4/3 এর কোনো বাস্তব কোণ নেই।" }
         }
       ]
     }

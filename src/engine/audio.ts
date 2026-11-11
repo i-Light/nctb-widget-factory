@@ -1,4 +1,4 @@
-// Synthesized Web Audio Tactile Haptics Engine (0 KB external assets, 100% offline PWA ready)
+// Synthesized Web Audio + Android Haptic Engine (0 KB external assets, 100% offline phone PWA ready)
 export class TactileAudio {
   private ctx: AudioContext | null = null;
   public muted = false;
@@ -10,14 +10,28 @@ export class TactileAudio {
         window.AudioContext ||
         (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!this.ctx && AC) this.ctx = new AC();
-      if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      if (this.ctx && this.ctx.state === 'suspended') {
+        void this.ctx.resume();
+      }
       return this.ctx;
     } catch {
       return null;
     }
   }
 
+  vibrate(pattern: number | number[]) {
+    if (this.muted || typeof navigator === 'undefined') return;
+    try {
+      if (typeof navigator.vibrate === 'function') {
+        navigator.vibrate(pattern);
+      }
+    } catch {
+      // Silently no-op on iOS Safari or restricted WebViews
+    }
+  }
+
   tick(pitchFactor = 1) {
+    this.vibrate(6);
     const ctx = this.ensureCtx();
     if (!ctx) return;
     const osc = ctx.createOscillator();
@@ -35,6 +49,7 @@ export class TactileAudio {
   }
 
   pop(up = true) {
+    this.vibrate(8);
     const ctx = this.ensureCtx();
     if (!ctx) return;
     const osc = ctx.createOscillator();
@@ -52,6 +67,7 @@ export class TactileAudio {
   }
 
   launch() {
+    this.vibrate(14);
     const ctx = this.ensureCtx();
     if (!ctx) return;
     const osc = ctx.createOscillator();
@@ -69,6 +85,7 @@ export class TactileAudio {
   }
 
   chime() {
+    this.vibrate([12, 30, 18]);
     const ctx = this.ensureCtx();
     if (!ctx) return;
     [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
@@ -88,6 +105,7 @@ export class TactileAudio {
   }
 
   nudge() {
+    this.vibrate(10);
     const ctx = this.ensureCtx();
     if (!ctx) return;
     [330, 277.18].forEach((freq, idx) => {
@@ -106,4 +124,4 @@ export class TactileAudio {
   }
 }
 
-export const sfx = new TactileAudio();
+export const sfx = new TactileAudio(); 

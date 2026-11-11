@@ -87,7 +87,6 @@ export function verifyTargetReachable(props: ProjectileCardProps): {
     };
   }
 
-  // Ensure initial state does not already solve the puzzle trivially
   const initM = computeProjectileMetrics(
     props.initialSpeed,
     props.initialAngle,
@@ -126,6 +125,13 @@ export function evaluateProjectileLesson(rawJson: unknown): {
   const errors: string[] = [];
 
   for (const card of manifest.cards) {
+    const enWordCount = card.prompt.en.trim().split(/\s+/).length;
+    if (enWordCount > 16) {
+      errors.push(
+        `Card ${card.cardNumber} Prompt Too Long (${enWordCount} words > 16-word phone cap).`
+      );
+    }
+
     if (card.cardStage === 'guided_manipulation') {
       const check = verifyTargetReachable(card.widgetProps);
       if (!check.solvable) {

@@ -3,14 +3,8 @@
   "wedge": "ssc-hsc-physics",
   "paper": 1,
   "chapterNumber": 3,
-  "chapterTitle": {
-    "en": "Dynamics: Projectile Motion",
-    "bn": "গতিবিদ্যা: প্রাসের গতি (Projectile Motion)"
-  },
-  "lessonTitle": {
-    "en": "Launch Angle, Max Height & The Vertical-Axis Board Trap",
-    "bn": "নিক্ষেপণ কোণ, সর্বাধিক উচ্চতা ও উল্লম্ব অক্ষের বোর্ড ফাঁদ"
-  },
+  "chapterTitle": { "en": "Dynamics: Projectile Motion", "bn": "গতিবিদ্যা: প্রক্ষেপক গতি" },
+  "lessonTitle": { "en": "Launch Angle, Max Height & The Vertical-Axis Board Trap", "bn": "প্রক্ষেপণ কোণ, সর্বাধিক উচ্চতা ও উলম্ব অক্ষের বোর্ড ট্র্যাপ" },
   "widgetType": "ProjectileSim",
   "estimatedMinutes": 6,
   "boardExamTag": "Dhaka Board HSC Physics 1st Paper CQ Ch-3",
@@ -18,30 +12,16 @@
     {
       "cardNumber": 1,
       "cardStage": "zero_fail_toy",
-      "prompt": {
-        "en": "Drag the launch angle θ slider and fire the ball. Watch how the peak height H and horizontal range R respond.",
-        "bn": "নিক্ষেপণ কোণ θ স্লাইডারটি সরিয়ে বলটি নিক্ষেপ করো। সর্বাধিক উচ্চতা H এবং পাল্লা R কীভাবে বদলায় দেখো।"
-      },
+      "prompt": { "en": "Drag aiming ring θ and fire! Watch peak height H and range R respond.", "bn": "কামানের কোণ θ ঘুরিয়ে ফায়ার করো! উচ্চতা H ও পাল্লা R কীভাবে বদলায় দেখো।" },
       "widgetProps": {
         "mode": "explore",
         "angleAxis": "horizontal",
         "initialSpeed": 20,
         "initialAngle": 30,
         "gravity": 10,
-        "speedBounds": {
-          "min": 10,
-          "max": 30,
-          "step": 5
-        },
-        "angleBounds": {
-          "min": 15,
-          "max": 75,
-          "step": 15
-        },
-        "lockedControls": [
-          "speed",
-          "gravity"
-        ],
+        "speedBounds": { "min": 10, "max": 30, "step": 5 },
+        "angleBounds": { "min": 15, "max": 75, "step": 5 },
+        "lockedControls": ["speed", "gravity"],
         "showVectorComponents": true,
         "targetMetric": "none",
         "tolerance": 0.5
@@ -50,23 +30,11 @@
     {
       "cardNumber": 2,
       "cardStage": "prediction_hook",
-      "prompt": {
-        "en": "At θ = 45°, doubling launch speed u from 10 m/s to 20 m/s will make maximum height H...",
-        "bn": "θ = 45° কোণে নিক্ষেপণ বেগ u ১০ m/s থেকে দ্বিগুণ করে ২০ m/s করলে সর্বাধিক উচ্চতা H কতগুণ হবে?"
-      },
+      "prompt": { "en": "At θ = 45°, doubling speed u from 10 to 20 m/s makes height H...", "bn": "θ = 45° কোণে বেগ u ১০ থেকে ২০ m/s করলে সর্বোচ্চ উচ্চতা H কতগুণ হবে?" },
       "options": [
-        {
-          "en": "2× higher",
-          "bn": "২ গুণ হবে"
-        },
-        {
-          "en": "4× higher",
-          "bn": "৪ গুণ হবে"
-        },
-        {
-          "en": "Stay the same",
-          "bn": "অপরিবর্তিত থাকবে"
-        }
+        { "en": "2× higher (Linear)", "bn": "২ গুণ হবে" },
+        { "en": "4× higher (u² scaling)", "bn": "৪ গুণ হবে (u² অনুপাতে)" },
+        { "en": "Stay the same", "bn": "একই থাকবে" }
       ],
       "correctOptionIndex": 1,
       "widgetProps": {
@@ -75,20 +43,9 @@
         "initialSpeed": 10,
         "initialAngle": 45,
         "gravity": 10,
-        "speedBounds": {
-          "min": 10,
-          "max": 30,
-          "step": 10
-        },
-        "angleBounds": {
-          "min": 15,
-          "max": 75,
-          "step": 15
-        },
-        "lockedControls": [
-          "angle",
-          "gravity"
-        ],
+        "speedBounds": { "min": 10, "max": 20, "step": 10 },
+        "angleBounds": { "min": 15, "max": 75, "step": 15 },
+        "lockedControls": ["angle", "gravity"],
         "showVectorComponents": true,
         "targetMetric": "none",
         "tolerance": 0.5
@@ -97,44 +54,20 @@
     {
       "cardNumber": 3,
       "cardStage": "formula_lock_in",
-      "prompt": {
-        "en": "Place the tokens in order to build the NCTB maximum height formula H =",
-        "bn": "সর্বাধিক উচ্চতার NCTB সূত্রটি তৈরি করতে টোকেনগুলো সঠিক ক্রমে বসাও: H ="
-      },
+      "prompt": { "en": "Tap tokens to build the NCTB maximum height formula H =", "bn": "টাইল ট্যাপ করে NCTB সর্বোচ্চ উচ্চতার সূত্রটি সাজাও: H =" },
       "targetFormulaLatex": "H = \\frac{u^2 \\sin^2\\theta}{2g}",
-      "availableTokens": [
-        "u²",
-        "sin²θ",
-        "÷ 2g",
-        "cos²θ"
-      ],
-      "correctTokenOrder": [
-        "u²",
-        "sin²θ",
-        "÷ 2g"
-      ],
+      "availableTokens": ["u²", "sin²θ", "2g", "cos²θ"],
+      "correctTokenOrder": ["u²", "sin²θ", "2g"],
       "seeWhySteps": [
         {
-          "title": {
-            "en": "1. Vertical velocity at peak is zero",
-            "bn": "১. সর্বোচ্চ বিন্দুতে উল্লম্ব বেগ শূন্য"
-          },
-          "latex": "v_y^2 = u_y^2 - 2gH \\Rightarrow 0 = (u\\sin\\theta)^2 - 2gH",
-          "note": {
-            "en": "Gravity only decelerates the vertical component u sin θ.",
-            "bn": "অভিকর্ষজ ত্বরণ g কেবল উল্লম্ব উপাংশ u sin θ-কে হ্রাস করে।"
-          }
+          "title": { "en": "1. Vertical velocity becomes zero at the apex", "bn": "১. সর্বোচ্চ বিন্দুতে উল্লম্ব বেগ শূন্য হয়" },
+          "latex": "v_y^2 = u_y^2 - 2gH \\implies 0 = (u\\sin\\theta)^2 - 2gH",
+          "note": { "en": "Gravity only slows down the vertical velocity u sin θ.", "bn": "অভিকর্ষজ ত্বরণ g কেবল উল্লম্ব উপাংশ u sin θ-কে হ্রাস করে।" }
         },
         {
-          "title": {
-            "en": "2. Solve for Maximum Height H",
-            "bn": "২. সর্বাধিক উচ্চতা H নির্ণয়"
-          },
+          "title": { "en": "2. Rearrange for Maximum Height H", "bn": "২. সর্বোচ্চ উচ্চতা H নির্ণয়" },
           "latex": "H = \\frac{u^2 \\sin^2\\theta}{2g}",
-          "note": {
-            "en": "Because u is squared, doubling u makes H four times larger!",
-            "bn": "যেহেতু u² আছে, তাই বেগ দ্বিগুণ করলে উচ্চতা ৪ গুণ বৃদ্ধি পায়!"
-          }
+          "note": { "en": "Because u is squared, doubling speed makes H four times taller!", "bn": "সূত্রে u² থাকায় বেগ দ্বিগুণ করলে উচ্চতা H চার গুণ হয়!" }
         }
       ],
       "widgetProps": {
@@ -143,19 +76,9 @@
         "initialSpeed": 20,
         "initialAngle": 45,
         "gravity": 10,
-        "speedBounds": {
-          "min": 10,
-          "max": 30,
-          "step": 5
-        },
-        "angleBounds": {
-          "min": 15,
-          "max": 75,
-          "step": 15
-        },
-        "lockedControls": [
-          "gravity"
-        ],
+        "speedBounds": { "min": 10, "max": 30, "step": 5 },
+        "angleBounds": { "min": 15, "max": 75, "step": 5 },
+        "lockedControls": ["gravity"],
         "showVectorComponents": true,
         "targetMetric": "none",
         "tolerance": 0.5
@@ -164,22 +87,13 @@
     {
       "cardNumber": 4,
       "cardStage": "guided_manipulation",
-      "prompt": {
-        "en": "Tune launch speed u and angle θ to land the ball right on the target flag at R = 40.0 m (g = 10 m/s²).",
-        "bn": "বলটিকে ঠিক R = 40.0 m দূরের লক্ষ্যবস্তুতে ফেলতে বেগ u এবং কোণ θ সমন্বয় করো (g = 10 m/s²)—"
-      },
+      "prompt": { "en": "Pick speed u and drag θ to hit the flag at R = 40.0 m!", "bn": "বেগ u বেছে কোণ θ ঘুরিয়ে R = 40.0 m লক্ষ্যবস্তুতে আঘাত করো!" },
       "requiresSubscriptionOnFreeLink": true,
       "seeWhySteps": [
         {
-          "title": {
-            "en": "Horizontal Range Formula",
-            "bn": "অনুভূমিক পাল্লার সূত্র"
-          },
+          "title": { "en": "Horizontal Range Formula", "bn": "অনুভূমিক পাল্লার সূত্র" },
           "latex": "R = \\frac{u^2 \\sin(2\\theta)}{g}",
-          "note": {
-            "en": "At u = 20 m/s and θ = 45°, sin(90°) = 1, so R = 400 / 10 = 40 m.",
-            "bn": "u = 20 m/s এবং θ = 45° হলে sin(90°) = 1, তাই R = 400 / 10 = 40 m।"
-          }
+          "note": { "en": "At u = 20 m/s and θ = 45°, sin(90°) = 1, giving R = 400 / 10 = 40.0 m.", "bn": "u = 20 m/s ও θ = 45° হলে sin(90°) = 1, ফলে R = 400 / 10 = 40.0 m।" }
         }
       ],
       "widgetProps": {
@@ -188,19 +102,9 @@
         "initialSpeed": 15,
         "initialAngle": 30,
         "gravity": 10,
-        "speedBounds": {
-          "min": 10,
-          "max": 25,
-          "step": 5
-        },
-        "angleBounds": {
-          "min": 15,
-          "max": 75,
-          "step": 15
-        },
-        "lockedControls": [
-          "gravity"
-        ],
+        "speedBounds": { "min": 10, "max": 25, "step": 5 },
+        "angleBounds": { "min": 15, "max": 75, "step": 5 },
+        "lockedControls": ["gravity"],
         "showVectorComponents": true,
         "targetMetric": "range",
         "targetValue": 40.0,
@@ -210,49 +114,28 @@
     {
       "cardNumber": 5,
       "cardStage": "exam_trap",
-      "prompt": {
-        "en": "BOARD TRAP: A ball is launched at u = 20 m/s making a 30° angle WITH THE VERTICAL Y-AXIS (g = 10 m/s²). What is its maximum height H?",
-        "bn": "বোর্ড ফাঁদ: একটি বলকে উল্লম্ব অক্ষের (Y-অক্ষ) সাথে 30° কোণে u = 20 m/s বেগে নিক্ষেপ করা হলো (g = 10 m/s²)। সর্বাধিক উচ্চতা H কত?"
-      },
+      "prompt": { "en": "DHAKA BOARD: Fired at u = 20 m/s, 30° WITH VERTICAL Y-AXIS. Find peak H!", "bn": "ঢাকা বোর্ড: উল্লম্ব Y-অক্ষের সাথে ৩০° কোণে u = 20 m/s বেগে নিক্ষেপ। H কত?" },
       "boardReference": "Dhaka Board HSC Physics 1st Paper CQ Twist",
       "options": [
         {
-          "label": {
-            "en": "H = 5.0 m (using sin 30°)",
-            "bn": "H = 5.0 m (sin 30° বসিয়ে)"
-          },
+          "label": { "en": "H = 5.0 m (using sin 30°)", "bn": "H = 5.0 m (sin 30° বসিয়ে)" },
           "simulatedAngleDeg": 30,
           "isTrapMisconception": true,
-          "feedback": {
-            "en": "Watch the arc! In NCTB formulas, θ is measured from the HORIZONTAL ground. 30° with vertical = 60° with horizontal!",
-            "bn": "কোণটি খেয়াল করো! সূত্রে θ সর্বদা ভূমির (অনুভূমিকের) সাথে কোণ। উল্লম্বের সাথে 30° মানে ভূমির সাথে 90° - 30° = 60°!"
-          }
+          "feedback": { "en": "Watch both balls! 30° with vertical means 90° − 30° = 60° from ground—climbing 3× higher to 15.0 m!", "bn": "বল দুটি দেখো! উল্লম্বের সাথে ৩০° মানে ভূমির সাথে ৯০° − ৩০° = ৬০° কোণ—বলটি ১৫.০ মিটার উপরে উঠবে!" }
         },
         {
-          "label": {
-            "en": "H = 15.0 m (since θ_horizontal = 60°)",
-            "bn": "H = 15.0 m (যেহেতু ভূমির সাথে কোণ 60°)"
-          },
+          "label": { "en": "H = 15.0 m (θ_ground = 60°)", "bn": "H = 15.0 m (ভূমির সাথে ৬০°)" },
           "simulatedAngleDeg": 60,
           "isTrapMisconception": false,
-          "feedback": {
-            "en": "Spot on! θ = 90° - 30° = 60°, so H = (400 × (√3/2)²) / 20 = 15.0 m.",
-            "bn": "একদম সঠিক! θ = 90° - 30° = 60°, তাই H = (400 × 3/4) / 20 = 15.0 m।"
-          }
+          "feedback": { "en": "Spot on! θ = 90° − 30° = 60° from ground, so H = (400 × 0.75) / 20 = 15.0 m.", "bn": "একদম সঠিক! ভূমির সাথে কোণ θ = ৬০°, তাই H = (400 × 3/4) / 20 = 15.0 m।" }
         }
       ],
       "correctOptionIndex": 1,
       "seeWhySteps": [
         {
-          "title": {
-            "en": "Convert Vertical Angle to Horizontal Angle First",
-            "bn": "প্রথমে উল্লম্ব কোণকে অনুভূমিক কোণে রূপান্তর করো"
-          },
-          "latex": "\\theta_{\\text{horiz}} = 90^\\circ - 30^\\circ = 60^\\circ \\implies H = \\frac{20^2 \\sin^2(60^\\circ)}{2 \\times 10} = 15\\text{ m}",
-          "note": {
-            "en": "Alternatively, use H = (u² cos²α) / 2g when α is given with the vertical.",
-            "bn": "অথবা উল্লম্বের সাথে α কোণ দেওয়া থাকলে সরাসরি H = (u² cos²α) / 2g ব্যবহার করা যায়।"
-          }
+          "title": { "en": "Convert Vertical Angle to Horizontal Ground Angle", "bn": "উল্লম্ব কোণকে অনুভূমিক ভূমির কোণে রূপান্তর করো" },
+          "latex": "\\theta_{\\text{horiz}} = 90^\\circ - 30^\\circ = 60^\\circ \\implies H = \\frac{20^2 \\sin^2 60^\\circ}{2 \\times 10} = 15.0\\text{ m}",
+          "note": { "en": "Or use H = (u² cos²α) / 2g directly when α is measured from the vertical.", "bn": "বিকল্পভাবে উল্লম্বের সাথে α দেওয়া থাকলে সরাসরি H = (u² cos²α) / 2g বসানো যায়।" }
         }
       ],
       "widgetProps": {
@@ -261,21 +144,9 @@
         "initialSpeed": 20,
         "initialAngle": 30,
         "gravity": 10,
-        "speedBounds": {
-          "min": 20,
-          "max": 20,
-          "step": 5
-        },
-        "angleBounds": {
-          "min": 30,
-          "max": 60,
-          "step": 15
-        },
-        "lockedControls": [
-          "speed",
-          "angle",
-          "gravity"
-        ],
+        "speedBounds": { "min": 20, "max": 20, "step": 5 },
+        "angleBounds": { "min": 30, "max": 60, "step": 15 },
+        "lockedControls": ["speed", "angle", "gravity"],
         "showVectorComponents": true,
         "targetMetric": "maxHeight",
         "targetValue": 15.0,
@@ -285,103 +156,46 @@
     {
       "cardNumber": 6,
       "cardStage": "skills_check",
-      "prompt": {
-        "en": "Rapid 3-MCQ Board Check — Lock in your streak!",
-        "bn": "দ্রুত ৩টি বোর্ড MCQ যাচাই — তোমার স্ট্রিক নিশ্চিত করো!"
-      },
+      "prompt": { "en": "3-MCQ Projectile Sprint — Lock in your streak!", "bn": "প্রক্ষেপক ৩টি বোর্ড MCQ স্প্রিন্ট — স্ট্রিক লক করো!" },
       "xpReward": 30,
       "questions": [
         {
           "id": "q1",
-          "prompt": {
-            "en": "Which launch angle with the horizontal gives the maximum horizontal range R for a fixed speed u?",
-            "bn": "নির্দিষ্ট বেগে অনুভূমিকের সাথে কত কোণে নিক্ষেপ করলে পাল্লা R সর্বাধিক হয়?"
-          },
+          "prompt": { "en": "Which horizontal launch angle gives maximum range R for a fixed speed u?", "bn": "নির্দিষ্ট বেগ u-এর জন্য ভূমির সাথে কত কোণে সর্বাধিক পাল্লা R পাওয়া যায়?" },
           "options": [
-            {
-              "en": "30°",
-              "bn": "30°"
-            },
-            {
-              "en": "45°",
-              "bn": "45°"
-            },
-            {
-              "en": "60°",
-              "bn": "60°"
-            },
-            {
-              "en": "90°",
-              "bn": "90°"
-            }
+            { "en": "30°", "bn": "৩০°" },
+            { "en": "45°", "bn": "৪৫°" },
+            { "en": "60°", "bn": "৬০°" },
+            { "en": "90°", "bn": "৯০°" }
           ],
           "correctIndex": 1,
-          "explanation": {
-            "en": "sin(2θ) reaches its maximum value of 1 when 2θ = 90°, i.e. θ = 45°.",
-            "bn": "2θ = 90° বা θ = 45° হলে sin(2θ)-এর মান সর্বাধিক ১ হয়।"
-          }
+          "explanation": { "en": "sin(2θ) peaks at 1 when 2θ = 90°, so θ = 45°.", "bn": "2θ = 90° বা θ = 45° হলে sin(2θ)-এর মান সর্বোচ্চ ১ হয়।" }
         },
         {
           "id": "q2",
-          "prompt": {
-            "en": "If a projectile has horizontal range R at θ = 25°, which other horizontal launch angle gives the exact same range R?",
-            "bn": "একই বেগে θ = 25° কোণে নিক্ষিপ্ত প্রাসের সমান পাল্লা R পাওয়া যাবে আর কোন কোণে?"
-          },
+          "prompt": { "en": "If θ = 25° gives range R, which other horizontal angle gives the exact same range R?", "bn": "ভূমির সাথে ২৫° কোণে পাল্লা R হলে আর কোন কোণে ঠিক একই পাল্লা R পাওয়া যাবে?" },
           "options": [
-            {
-              "en": "50°",
-              "bn": "50°"
-            },
-            {
-              "en": "65°",
-              "bn": "65°"
-            },
-            {
-              "en": "75°",
-              "bn": "75°"
-            },
-            {
-              "en": "45°",
-              "bn": "45°"
-            }
+            { "en": "50°", "bn": "৫০°" },
+            { "en": "65°", "bn": "৬৫°" },
+            { "en": "75°", "bn": "৭৫°" },
+            { "en": "45°", "bn": "৪৫°" }
           ],
           "correctIndex": 1,
-          "explanation": {
-            "en": "Complementary angles θ and (90° − θ) yield equal range: 90° − 25° = 65°.",
-            "bn": "পূরক কোণ θ এবং (90° − θ)-এর জন্য পাল্লা সমান হয়: 90° − 25° = 65°।"
-          }
+          "explanation": { "en": "Complementary angles θ and (90° − θ) have equal range: 90° − 25° = 65°.", "bn": "পূরক কোণ θ ও (90° − θ)-এর অনুভূমিক পাল্লা সমান: ৯০° − ২৫° = ৬৫°।" }
         },
         {
           "id": "q3",
-          "prompt": {
-            "en": "At the highest point of a 60° projectile's trajectory (u = 20 m/s), what is its speed?",
-            "bn": "u = 20 m/s বেগে 60° কোণে নিক্ষিপ্ত প্রাসের সর্বোচ্চ বিন্দুতে বেগ কত?"
-          },
+          "prompt": { "en": "A ball is launched at u = 20 m/s, θ = 60°. What is its speed right at the highest point?", "bn": "u = 20 m/s বেগে ৬০° কোণে নিক্ষিপ্ত বলের সর্বোচ্চ বিন্দুতে বেগ কত?" },
           "options": [
-            {
-              "en": "0 m/s",
-              "bn": "0 m/s"
-            },
-            {
-              "en": "10 m/s",
-              "bn": "10 m/s"
-            },
-            {
-              "en": "17.32 m/s",
-              "bn": "17.32 m/s"
-            },
-            {
-              "en": "20 m/s",
-              "bn": "20 m/s"
-            }
+            { "en": "0 m/s", "bn": "0 m/s" },
+            { "en": "10 m/s", "bn": "10 m/s" },
+            { "en": "17.32 m/s", "bn": "17.32 m/s" },
+            { "en": "20 m/s", "bn": "20 m/s" }
           ],
           "correctIndex": 1,
-          "explanation": {
-            "en": "At the peak v_y = 0, leaving only horizontal speed u cos 60° = 20 × 0.5 = 10 m/s.",
-            "bn": "সর্বোচ্চ বিন্দুতে v_y = 0 থাকে, কেবল অনুভূমিক বেগ u cos 60° = 20 × 0.5 = 10 m/s ক্রিয়া করে।"
-          }
+          "explanation": { "en": "At the apex v_y = 0, leaving only horizontal speed u cos 60° = 20 × 0.5 = 10 m/s.", "bn": "সর্বোচ্চ বিন্দুতে v_y = 0, তাই কেবল অনুভূমিক বেগ u cos 60° = 20 × 0.5 = 10 m/s থাকে।" }
         }
       ]
     }
   ]
-}
+}' at (y=300, x=450).
