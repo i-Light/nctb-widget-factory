@@ -1,5 +1,4 @@
-'use client';'use client';
-
+'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { sfx } from '@/engine/audio';
 import type { ProjectileCardProps } from './ProjectileSim.schema';
