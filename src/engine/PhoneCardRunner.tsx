@@ -10,8 +10,10 @@ import { ProjectileSim } from '@/widgets/ProjectileSim/ProjectileSim';
 import { evaluateProjectileLesson } from '@/widgets/ProjectileSim/ProjectileSim.eval';
 import { VectorRiverBoatSim } from '@/widgets/VectorRiverBoatSim/VectorRiverBoatSim';
 import { evaluateRiverBoatLesson, verifyRiverBoatPuzzle } from '@/widgets/VectorRiverBoatSim/VectorRiverBoatSim.eval';
-import type { LessonManifest, RiverBoatLessonManifest } from './schema';
-type SupportedManifest = LessonManifest | RiverBoatLessonManifest;
+import { KirchhoffCircuitBoard } from '@/widgets/KirchhoffCircuitBoard/KirchhoffCircuitBoard';
+import { evaluateKirchhoffLesson, verifyKirchhoffPuzzle } from '@/widgets/KirchhoffCircuitBoard/KirchhoffCircuitBoard.eval';
+import type { KirchhoffLessonManifest, LessonManifest, RiverBoatLessonManifest } from './schema';
+type SupportedManifest = LessonManifest | RiverBoatLessonManifest | KirchhoffLessonManifest;
 type Lang = 'en' | 'bn';
 export interface PhoneCardRunnerProps {
   manifest: SupportedManifest;
@@ -47,7 +49,9 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
           cardIdx?: number;
           lang?: Lang;
         });
-        if (typeof parsed.cardIdx === 'number' && parsed.cardIdx >= 0 && parsed.cardIdx < 6) setCardIdx(parsed.cardIdx);
+        if (typeof parsed.cardIdx === 'number' && parsed.cardIdx >= 0 && parsed.cardIdx < 6) {
+          setCardIdx(parsed.cardIdx);
+        }
         if (parsed.lang === 'en' || parsed.lang === 'bn') setLang(parsed.lang);
       }
     } catch {}
@@ -81,13 +85,24 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
       setLessonFinished(false);
     }
   }, [cardIdx, card]);
-  const evalSummary = useMemo(() => manifest.widgetType === 'VectorRiverBoatSim' ? evaluateRiverBoatLesson(manifest) : evaluateProjectileLesson(manifest), [manifest]);
+  const evalSummary = useMemo(() => {
+    if (manifest.widgetType === 'VectorRiverBoatSim') return evaluateRiverBoatLesson(manifest);
+    if (manifest.widgetType === 'KirchhoffCircuitBoard') return evaluateKirchhoffLesson(manifest);
+    return evaluateProjectileLesson(manifest);
+  }, [manifest]);
   const renderWidget = () => {
     if (card.cardStage === 'skills_check') return null;
     if (manifest.widgetType === 'VectorRiverBoatSim') {
       const rbCard = manifest.cards[cardIdx];
       if (rbCard.cardStage === 'skills_check') return null;
       return <VectorRiverBoatSim config={rbCard.widgetProps} lang={lang} dualReplayTrigger={dualReplayCount} onCrossingComplete={({
+        runCount
+      }) => setToyRuns(runCount)} onGoalSolved={() => setPuzzleSolved(true)} />;
+    }
+    if (manifest.widgetType === 'KirchhoffCircuitBoard') {
+      const kcCard = manifest.cards[cardIdx];
+      if (kcCard.cardStage === 'skills_check') return null;
+      return <KirchhoffCircuitBoard config={kcCard.widgetProps} lang={lang} dualReplayTrigger={dualReplayCount} onCircuitRunComplete={({
         runCount
       }) => setToyRuns(runCount)} onGoalSolved={() => setPuzzleSolved(true)} />;
     }
@@ -124,6 +139,16 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
         });
         setSimulatedHallucination(res.reason ?? 'Gate 2 blocked unsolvable u >= v config.');
       }
+    } else if (manifest.widgetType === 'KirchhoffCircuitBoard') {
+      const c4 = manifest.cards[3];
+      if (c4.cardStage === 'guided_manipulation') {
+        const res = verifyKirchhoffPuzzle({
+          ...c4.widgetProps,
+          targetValue: 8.0,
+          maxFuseCurrent: 7.0
+        });
+        setSimulatedHallucination(res.reason ?? 'Gate 2 blocked 8.0A target exceeding 7.0A fuse.');
+      }
     } else {
       const broken = structuredClone(manifest);
       const c4 = broken.cards[3];
@@ -150,12 +175,16 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
       <main className="my-1.5 flex flex-1 flex-col justify-between gap-2">
         <div>
           <div className="mb-1 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-teal-800">
-            <span>{lang === 'bn' ? `কার্ড ${card.cardNumber}/৬` : `Card ${card.cardNumber} of 6`}</span>
+            <span>
+              {lang === 'bn' ? `কার্ড ${card.cardNumber}/৬` : `Card ${card.cardNumber} of 6`}
+            </span>
             {card.cardStage === 'exam_trap' && <span className="rounded-lg bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold text-amber-900">
                 {card.boardReference.split(' ').slice(0, 3).join(' ')}
               </span>}
           </div>
-          <h1 className="text-[16px] font-extrabold leading-[1.45] text-slate-900">{card.prompt[lang]}</h1>
+          <h1 className="text-[16px] font-extrabold leading-[1.45] text-slate-900">
+            {card.prompt[lang]}
+          </h1>
         </div>
 
         {card.cardStage !== 'skills_check' && <div>{renderWidget()}</div>}

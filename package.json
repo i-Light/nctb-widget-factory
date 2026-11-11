@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run",
-    "eval:lessons": "vitest run src/widgets/**/*.eval.test.ts",
+    "eval:lessons": "vitest run .eval.test",
     "generate:lessons": "tsx scripts/generate-lessons.ts",
     "e2e": "playwright test"
   },
