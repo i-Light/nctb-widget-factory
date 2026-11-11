@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { ProjectileCardPropsSchema } from '@/widgets/ProjectileSim/ProjectileSim.schema';
 import { VectorRiverBoatPropsSchema } from '@/widgets/VectorRiverBoatSim/VectorRiverBoatSim.schema';
 import { KirchhoffPropsSchema } from '@/widgets/KirchhoffCircuitBoard/KirchhoffCircuitBoard.schema';
+import { RayOpticsPropsSchema } from '@/widgets/RayOpticsCanvas/RayOpticsCanvas.schema';
 
 export const BilingualTextSchema = z.object({
   en: z.string().min(1).max(180),
@@ -134,9 +135,26 @@ export const KirchhoffLessonManifestSchema = z.object({
   cards: z.array(KirchhoffLessonCardSchema).length(6),
 });
 
+export const RayOpticsLessonCardSchema = createLessonCardSchema(RayOpticsPropsSchema);
+
+export const RayOpticsLessonManifestSchema = z.object({
+  lessonId: z.string().regex(/^[a-z0-9-]+$/),
+  wedge: z.literal('ssc-hsc-physics'),
+  paper: z.union([z.literal(1), z.literal(2)]),
+  chapterNumber: z.number().int().min(1).max(14),
+  chapterTitle: BilingualTextSchema,
+  lessonTitle: BilingualTextSchema,
+  widgetType: z.literal('RayOpticsCanvas'),
+  estimatedMinutes: z.number().min(4).max(12),
+  boardExamTag: z.string(),
+  cards: z.array(RayOpticsLessonCardSchema).length(6),
+});
+
 export type LessonManifest = z.infer<typeof LessonManifestSchema>;
 export type LessonCard = z.infer<typeof LessonCardSchema>;
 export type RiverBoatLessonManifest = z.infer<typeof RiverBoatLessonManifestSchema>;
 export type RiverBoatLessonCard = z.infer<typeof RiverBoatLessonCardSchema>;
 export type KirchhoffLessonManifest = z.infer<typeof KirchhoffLessonManifestSchema>;
 export type KirchhoffLessonCard = z.infer<typeof KirchhoffLessonCardSchema>;
+export type RayOpticsLessonManifest = z.infer<typeof RayOpticsLessonManifestSchema>;
+export type RayOpticsLessonCard = z.infer<typeof RayOpticsLessonCardSchema>;

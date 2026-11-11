@@ -25,8 +25,8 @@ Phone-exclusive, Brilliant-style 6-card interactive STEM lesson engine & AI-veri
 1. **`<ProjectileSim />` (Paper 1 Ch. 3)** — **Phone-Only v2 Complete** (`/play/projectile`, `360×268` stage, `r=28px` hit ring, `40px` above-thumb readout, bottom-sheet drawers)
 2. **`<VectorRiverBoatSim />` (Paper 1 Ch. 2)** — **Phone-Only v2 Complete** (`/play/riverboat`, `360×272` stage, `r=64px` glowing compass helm, riding vector parallelogram, `+25m` rock reef, Rajshahi Board dual-boat replay)
 3. **`<KirchhoffCircuitBoard />` (Paper 2 Ch. 3)** — **Phone-Only v2 Complete** (`/play/kirchhoff`, `360×280` breadboard + diamond Wheatstone stage, `56×44px` gold snap/scrub sockets, `42px` above-thumb readout, 60fps proportional electron drift beads, `7.0A` glass fuse + breaker reset, Dhaka Board dual-galvanometer replay)
-4. **`<RayOpticsCanvas />` (Paper 2 Ch. 6)** — v1 Functional + Seed/Eval Built → **Next in Queue for Phone-Only v2 Brilliant Upgrade**
-5. **`<KinematicsGraphMatcher />` (Paper 1 Ch. 3)** — v1 Functional + Seed/Eval Built → Queued for Phone-Only v2 Upgrade
+4. **`<RayOpticsCanvas />` (Paper 2 Ch. 6)** — **Phone-Only v2 Complete** (`/play/rayoptics`, `360×276` velvet optic stage, `r=28px` draggable candle with `42px` above-flame `u · v` readout, `+10D/+6.67D/+5D` focal pills, 3 principal rays + dashed virtual back-rays, `v = 60 cm` cinema-screen blur-halo challenge, Dinajpur Board dual `±m` overlay replay)
+5. **`<KinematicsGraphMatcher />` (Paper 1 Ch. 3)** — v1 Functional + Seed/Eval Built → **Next in Queue for Phone-Only v2 Brilliant Upgrade**
 6. **`<FormulaBalancer />` (Paper 1 Ch. 6)** — v1 Functional + Seed/Eval Built → Queued for Phone-Only v2 Upgrade
 
 ## Quickstart (Local Terminal / Agent Sandbox)
