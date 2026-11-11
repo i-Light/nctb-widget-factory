@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { sfx } from './audio';
+import { useLang } from './useLang';
 import { PhoneTopHeaderBar } from './PhoneTopHeaderBar';
 import { PhoneProofBottomSheet, PhoneStudioBottomSheet } from './PhoneCardDrawers';
 import { PhoneCardActionPanel } from './PhoneCardActionPanel';
@@ -18,7 +19,6 @@ import { KinematicsGraphMatcher } from '@/widgets/KinematicsGraphMatcher/Kinemat
 import { evaluateKinematicsLesson, verifyKinematicsGraphPuzzle } from '@/widgets/KinematicsGraphMatcher/KinematicsGraphMatcher.eval';
 import type { KinematicsLessonManifest, KirchhoffLessonManifest, LessonManifest, RayOpticsLessonManifest, RiverBoatLessonManifest } from './schema';
 type SupportedManifest = LessonManifest | RiverBoatLessonManifest | KirchhoffLessonManifest | RayOpticsLessonManifest | KinematicsLessonManifest;
-type Lang = 'en' | 'bn';
 export interface PhoneCardRunnerProps {
   manifest: SupportedManifest;
 }
@@ -26,7 +26,7 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
   manifest
 }) => {
   const storageKey = `nctb_phone_progress_${manifest.lessonId}`;
-  const [lang, setLang] = useState<Lang>('en');
+  const { lang, toggleLang } = useLang();
   const [cardIdx, setCardIdx] = useState(0);
   const [muted, setMuted] = useState(false);
   const [streak, setStreak] = useState(3);
@@ -51,26 +51,20 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
       if (raw) {
         const parsed = (JSON.parse(raw) as {
           cardIdx?: number;
-          lang?: Lang;
         });
         if (typeof parsed.cardIdx === 'number' && parsed.cardIdx >= 0 && parsed.cardIdx < 6) {
           setCardIdx(parsed.cardIdx);
         }
-        if (parsed.lang === 'en' || parsed.lang === 'bn') setLang(parsed.lang);
       }
     } catch {}
   }, [storageKey]);
   useEffect(() => {
     try {
       window.localStorage.setItem(storageKey, JSON.stringify({
-        cardIdx,
-        lang
+        cardIdx
       }));
     } catch {}
-  }, [storageKey, cardIdx, lang]);
-  useEffect(() => {
-    document.documentElement.lang = lang;
-  }, [lang]);
+  }, [storageKey, cardIdx]);
   const card = manifest.cards[cardIdx];
   useEffect(() => {
     setToyRuns(0);
@@ -207,7 +201,7 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
       if (!next) sfx.pop(true);
     }} onToggleLang={() => {
       sfx.pop(true);
-      setLang(l => l === 'bn' ? 'en' : 'bn');
+      toggleLang();
     }} onOpenStudio={() => {
       sfx.pop(true);
       setStudioSheetOpen(true);
