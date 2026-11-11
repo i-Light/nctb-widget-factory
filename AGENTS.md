@@ -1,26 +1,10 @@
 # AI Coding Agent Instructions (`nctb-widget-factory`)
+
 > **READ THIS ENTIRE FILE BEFORE TAKING ANY ACTION IN ANY SESSION.**
 
 ---
 
-## Rule 1 — Mandatory Session Workflow: Local-First via `bash`, Commit ONLY at the Very End
-
-Visual browser automation is slow and brittle for iterative software engineering. Every AI agent working on this repository **MUST** obey this exact execution workflow in every session:
-
-1. **Clone / Mirror Into Your Local Workspace First (`bash`):**
-   - At the very start of a session, bring the repository into your local filesystem so you can read, search, edit, typecheck, and run tests instantaneously with internal CLI and file tools (`bash`, `git`, `tsc`, `vitest`).
-   - **If your terminal has internet access:** Run `gh repo clone i-Light/nctb-widget-factory` (or `git pull --ff-only` if already cloned) into your local workspace directory immediately.
-   - **If your chat sandbox VM blocks outbound terminal internet:** First check if an uploaded archive or local mirror exists in your VM; if not (or if remote commits are newer), perform **at most ONE** initial read/download pass from GitHub to hydrate your local sandbox folder, then immediately close out of browser work and execute 100% of engineering locally via `bash` and local file tools.
-2. **Zero Mid-Task Browser Thrashing or Remote Commits:**
-   - **NEVER** edit files directly inside the GitHub web UI mid-task, and **NEVER** make partial/incremental commits to the remote repository while iterating, debugging, or testing.
-   - Complete 100% of code edits, documentation updates, Zod schema checks, and Vitest deterministic evaluations locally in your sandbox first.
-3. **Single Batch Commit Only After the Entire Task Is Finished (No Downloadable Files in Chat):**
-   - Only when the **entire assigned task** is 100% complete and verified locally, commit and push all modified/created files to `i-Light/nctb-widget-factory` in a single clean end-of-task operation (via `git push` when CLI network is available, or a single batched commit/PR merge at the very end when operating through a connected browser).
-   - **Do NOT** give the user `.zip` archives or downloadable files in chat—commit directly to the connected repository once the task is done.
-
----
-
-## Rule 2 — Strict Phone-Only Product Mandate (Zero Desktop / Tablet Compromises)
+## Rule 1 — Strict Phone-Only Product Mandate (Zero Desktop / Tablet Compromises)
 
 We are building **exclusively for mobile phone users (`360×800` to `430×932` portrait smartphones) and nothing else**. Every architectural, UI/UX, interaction, physics, logic, and convenience decision must be engineered 100% around a student holding a phone in one hand:
 
@@ -48,6 +32,7 @@ Before creating, editing, or reviewing any widget (`src/widgets/`), engine compo
 2. **`docs/WIDGET_UPGRADE_PLAN.md`** — Sequential phone-only v2 upgrade specifications for all 6 SSC/HSC Physics engines and the mandatory 10-point Phone-Only Definition of Done.
 
 ## Mandatory Local Pre-Commit Checks (Run in `bash` Before Final Commit)
+
 - Every widget lives in `src/widgets/<WidgetName>/` with `.tsx`, `.schema.ts`, `.eval.ts`, `.eval.test.ts`, and `.stories.tsx`.
 - Every lesson JSON in `src/lessons/` passes **Gate 1** (`Zod .safeParse()`) and **Gate 2** (`npm run eval:lessons` via Vitest deterministic math solvers).
 - `npm run typecheck` and `npm test` pass 100% locally before pushing the final single commit to GitHub.
