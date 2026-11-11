@@ -9,7 +9,7 @@ const meta: Meta<typeof RayOpticsCanvas> = {
 export default meta;
 
 export const Card1CandleRail: StoryObj<typeof RayOpticsCanvas> = {
-  args: { config: (seed.cards[0] as any).widgetProps, lang: 'bn' },
+  args: { config: (seed.cards[0] as any).widgetProps, lang: 'en' },
 };
 
 export const Card4CinemaScreenChallenge: StoryObj<typeof RayOpticsCanvas> = {
@@ -17,5 +17,5 @@ export const Card4CinemaScreenChallenge: StoryObj<typeof RayOpticsCanvas> = {
 };
 
 export const Card5DualMagnificationTrap: StoryObj<typeof RayOpticsCanvas> = {
-  args: { config: (seed.cards[4] as any).widgetProps, lang: 'bn', dualReplayTrigger: 1 },
+  args: { config: (seed.cards[4] as any).widgetProps, lang: 'en', dualReplayTrigger: 1 },
 };

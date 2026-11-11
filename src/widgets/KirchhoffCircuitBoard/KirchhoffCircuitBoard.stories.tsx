@@ -9,7 +9,7 @@ const meta: Meta<typeof KirchhoffCircuitBoard> = {
 export default meta;
 
 export const Card1ParallelToy: StoryObj<typeof KirchhoffCircuitBoard> = {
-  args: { config: (seed.cards[0] as any).widgetProps, lang: 'bn' },
+  args: { config: (seed.cards[0] as any).widgetProps, lang: 'en' },
 };
 
 export const Card4FuseProtectedChallenge: StoryObj<typeof KirchhoffCircuitBoard> = {
@@ -17,5 +17,5 @@ export const Card4FuseProtectedChallenge: StoryObj<typeof KirchhoffCircuitBoard>
 };
 
 export const Card5WheatstoneShuntTrap: StoryObj<typeof KirchhoffCircuitBoard> = {
-  args: { config: (seed.cards[4] as any).widgetProps, lang: 'bn', dualReplayTrigger: 1 },
+  args: { config: (seed.cards[4] as any).widgetProps, lang: 'en', dualReplayTrigger: 1 },
 };

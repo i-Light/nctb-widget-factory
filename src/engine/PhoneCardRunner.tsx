@@ -26,7 +26,7 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
   manifest
 }) => {
   const storageKey = `nctb_phone_progress_${manifest.lessonId}`;
-  const [lang, setLang] = useState<Lang>('bn');
+  const [lang, setLang] = useState<Lang>('en');
   const [cardIdx, setCardIdx] = useState(0);
   const [muted, setMuted] = useState(false);
   const [streak, setStreak] = useState(3);
@@ -68,6 +68,9 @@ export const PhoneCardRunner: React.FC<PhoneCardRunnerProps> = ({
       }));
     } catch {}
   }, [storageKey, cardIdx, lang]);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
   const card = manifest.cards[cardIdx];
   useEffect(() => {
     setToyRuns(0);

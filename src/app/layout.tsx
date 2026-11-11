@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="bn" className={`${inter.variable} ${hindSiliguri.variable}`}>
+    <html lang="en" className={`${inter.variable} ${hindSiliguri.variable}`}>
       <body className="bg-[#E7E7E2] text-slate-900 antialiased selection:bg-teal-200">
         <div className="mx-auto flex min-h-[100dvh] w-full max-w-[430px] flex-col justify-between bg-[#F7F7F5] pt-[max(0px,env(safe-area-inset-top))] pb-[max(0px,env(safe-area-inset-bottom))] shadow-sm">
           {children}

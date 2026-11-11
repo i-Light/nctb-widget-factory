@@ -9,7 +9,7 @@ const meta: Meta<typeof KinematicsGraphMatcher> = {
 export default meta;
 
 export const Card1DragAndDrive: StoryObj<typeof KinematicsGraphMatcher> = {
-  args: { config: (seed.cards[0] as any).widgetProps, lang: 'bn' },
+  args: { config: (seed.cards[0] as any).widgetProps, lang: 'en' },
 };
 
 export const Card4ChargingPadStop: StoryObj<typeof KinematicsGraphMatcher> = {
@@ -17,5 +17,5 @@ export const Card4ChargingPadStop: StoryObj<typeof KinematicsGraphMatcher> = {
 };
 
 export const Card5TurnaroundTrap: StoryObj<typeof KinematicsGraphMatcher> = {
-  args: { config: (seed.cards[4] as any).widgetProps, lang: 'bn', dualReplayTrigger: 1 },
+  args: { config: (seed.cards[4] as any).widgetProps, lang: 'en', dualReplayTrigger: 1 },
 };
